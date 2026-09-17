@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="turnos.js" defer></script>
+    <title>Reservar turno | JM Barbería</title>
+</head>
+<body>
+    <header>
+        <img src="/img/logo2.jpeg"  class="logo" alt="Logo JM Barbería">
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#servicios">Servicios</a>
+            <a href="turnos.html">Turnos</a>
+            <a href="index.html#ubicacion">Ubicación</a>
+        </nav>
+    </header>
+    <div class="decoracion decoracion-izquierda">✂</div>
+    <div class="decoracion decoracion-derecha">💈</div>
+    <main>
+        <section class="turnos-pagina">
+            <div id="elegirServicio">
+            <h1>Reservá tu turno</h1>
+            <p>
+                Elegí tu servicio, fecha y horario.
+            </p>
+            <div class="selector-servicios">
+            
+                
+
+            <button
+                class="opcion-servicio"
+                data-servicio="Corte de pelo"
+                data-precio="14000"
+                data-duracion="40">
+                ✂️ Corte de pelo — $14.000
+            </button>
+
+        <button
+            class="opcion-servicio"
+            data-servicio="Corte + Barba"
+            data-precio="16000"
+            data-duracion="50">
+            ✂️🧔 Corte + Barba — $16.000             
+        </button>
+
+        <button
+            class="opcion-servicio"
+            data-servicio="Color / Claritos"
+            data-precio="50000"
+            data-duracion="120">
+            🎨 Color / Claritos — $50.000
+        </button>
+            </div> <!--cierra selector servicios-->
+
+            </div> <!--cierra elegir servicio-->
+            <div class="panel-reserva">
+        <div class="paso-fecha" id="pasoFecha">
+        <h2>2. Elegí una fecha 📅</h2>
+        <input type="date" id="fechaReserva">
+    </div>
+
+
+    <div class="paso-horarios" id="pasoHorarios">
+        <h2>3. Elegí un horario 🕐</h2>
+        <div id="horariosReserva"></div>
+    </div>
+
+
+    <div class="paso-datos" id="pasoDatos">
+
+        <h2>4. Tus datos</h2>
+
+        <label for="nombreCliente">Nombre</label>
+        <input
+            type="text"
+            id="nombreCliente"
+            placeholder="Tu nombre"
+        >
+
+        <label for="telefonoCliente">Teléfono</label>
+        <input
+            type="tel"
+            id="telefonoCliente"
+            placeholder="Tu teléfono"
+        >
+
+        <button type="button" id="btnConfirmar" class="boton">
+            CONFIRMAR TURNO
+        </button>
+
+            </div>
+            <div class="resumen-turno" id="resumen-Turno">
+            </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

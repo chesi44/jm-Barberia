@@ -247,6 +247,13 @@ footer{
     height: 85px;
     object-fit: contain;
 }
+.aviso-deslizar{
+    display: block;
+    margin-top: 12px;
+    color: #888;
+    font-size: 13px;
+    text-align: center;
+}
 @media (max-width: 768px){
     header{
         flex-direction: column;
@@ -284,7 +291,6 @@ footer{
         margin:  0 auto;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        border: 5px solid red !important;
     }
     .imagen-trabajo{
         flex: 0 0 100%;
@@ -295,6 +301,9 @@ footer{
     }
     .flecha-carrusel{
         display: none !important;
+    }
+    .aviso-deslizar{
+        display: none;
     }
 }
 

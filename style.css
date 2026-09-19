@@ -85,7 +85,19 @@ nav a:hover{
 .servicios{
     padding: 80px 8%;
     text-align: center;
-    background-color: #181818;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(212,175,55,0.08),
+        transparent 38%
+    ),
+    repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.018) 0px,
+        rgba(255 ,255, 255, 0.018) 1px,
+        transparent 1px,
+        transparent 12px
+    ),
+    #080808;
 }
 .servicios h2{
     font-size: 40px;
@@ -171,6 +183,36 @@ nav a:hover{
     color: #bbb;
     margin-bottom: 30px;
 }
+.ubicacion{
+    padding: 70px 20px;
+    background-color: #0d0d0d;
+    text-align: center;
+}
+.ubicacion h2 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #eee;
+}
+.direccion{
+    color: #999;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+.direccion span{
+    color: #d4af37;
+    margin: 0 10px;
+}
+.ubicacion iframe{
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: 350px;
+    margin: 0 auto;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
 .ubicacion-info{
     display: flex;
     justify-content: center;
@@ -233,7 +275,75 @@ footer{
     .galeria{
         grid-template-columns: 1fr;
     }
+    .carrusel-trabajos{
+        gap: 8px;
+    }
+    .contenedor-trabajos{
+        width: 100%;
+    }
+    .imagen-trabajo{
+        flex: 0 0 100%;
+        width: 100%;
+        height: 320px;
+    }
+    .flecha-carrusel{
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+        display: none;
+    }
 }
+
+/*FOTOS FOTOS FOTOS */
+.flecha-carrusel {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    border-radius: 50%;
+    font-size: 35px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.flecha-carrusel:hover {
+    background-color: #d4af37;
+    color: #111;
+    transform: scale(1.1);
+}
+.carrusel-trabajos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+.contenedor-trabajos{
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+.imagen-trabajo{
+    width: calc((100% - 40px) / 3);
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    scroll-snap-type: start;
+}
+.contenedor-trabajos::-webkit-scrollbar{
+    display: none;
+}
+
+/*FOTOS FOTOS FOTOS */
+
 
 /*EMPIEZA TURNOS*/
 .turnos-pagina{
@@ -410,42 +520,7 @@ footer{
     border-radius: 18px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 }
-.mini-deco{
-    position: fixed;
-    font-size: 35px;
-    opacity: 0.20;
-    pointer-events: none;
-    z-index: 0;
-}
-.deco1 {
-    top: 25%;
-    left: 10%;
-}
 
-.deco2 {
-    top: 35%;
-    right: 10%;
-}
-
-.deco3 {
-    top: 65%;
-    left: 20%;
-}
-
-.deco4 {
-    top: 75%;
-    right: 25%;
-}
-
-.deco5 {
-    top: 55%;
-    right: 7%;
-}
-
-.deco6 {
-    top: 82%;
-    left: 8%;
-}
 .decoracion{
     position: fixed;
     width: 220px;
@@ -464,6 +539,7 @@ footer{
     top: 48%;
     transform: rotate(-20deg);
 }
+
 @media (max-width: 768px) {
     .selector-servicios{
         flex-direction: column;

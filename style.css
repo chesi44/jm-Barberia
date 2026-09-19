@@ -293,7 +293,7 @@ footer{
         scroll-snap-align: start;
     }
     .flecha-carrusel{
-        display: none;
+        display: none !important;
     }
 }
 

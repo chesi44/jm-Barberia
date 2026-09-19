@@ -284,6 +284,7 @@ footer{
         margin:  0 auto;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
+        border: 5px solid red !important;
     }
     .imagen-trabajo{
         flex: 0 0 100%;

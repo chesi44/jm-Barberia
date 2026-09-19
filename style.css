@@ -216,6 +216,8 @@ footer{
     .hero{
         min-height: 500px;
         padding: 60px 6%;
+        background-attachment: scroll;
+        background-position: center center;
     }
     .hero h2 {
         font-size: 42px;

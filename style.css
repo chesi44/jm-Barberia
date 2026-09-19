@@ -189,9 +189,9 @@ nav a:hover{
     text-align: center;
 }
 .ubicacion h2 {
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 15px;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
     color: #eee;
 }
 .direccion{

@@ -1,3 +1,9 @@
+const SUPABASE_URL = "https://zccfkbfmwlmkukswwihv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_IzCUS3rfUgx3J2bIH2J4Eg_w7HuCLEC";
+const supabaseCliente = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY,
+);
 let duracionReserva = 0;
 let horariosSeleccionado = "";
 let servicioReserva = "";
@@ -7,6 +13,11 @@ const opcionesServicio = document.querySelectorAll(".opcion-servicio");
 const pasoFecha = document.getElementById("pasoFecha");
 const elegirServicio = document.getElementById("elegirServicio");
 const fechaReserva = document.getElementById("fechaReserva");
+const hoy = new Date();
+const anio = hoy.getFullYear();
+const mes = String(hoy.getMonth() + 1.).padStart(2,"0");
+const dia = String(hoy.getDate()).padStart(2,"0");
+fechaReserva.min = `${anio}-${mes}-${dia}`;
 const pasoHorarios = document.getElementById("pasoHorarios");
 const horariosReserva = document.getElementById("horariosReserva");
 const pasoDatos = document.getElementById("pasoDatos");
@@ -14,8 +25,15 @@ const nombreCliente = document.getElementById("nombreCliente");
 const telefonoCliente = document.getElementById("telefonoCliente");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const resumenTurno = document.getElementById("resumenTurno");
+
 fechaReserva.addEventListener("change", () => {
 
+    const fechaElegida = new Date(fechaReserva.value + "T00:00:00");
+    if(fechaElegida.getDay() === 0){
+        alert("Los domingos la barbería está cerrada");
+        fechaReserva.value = "";
+        return;
+    }
     pasoHorarios.classList.add("visible");
 
     generarHorariosReserva(duracionReserva);
@@ -70,7 +88,7 @@ function generarHorariosReserva(duracion){
             botonesHorarios.forEach((boton)=> {
                 boton.classList.remove("seleccionado");
         });
-                botonHora.classList.add("sleccionado");
+                botonHora.classList.add("seleccionado");
 
                 pasoDatos.classList.add("visible");
 
@@ -83,16 +101,33 @@ function generarHorariosReserva(duracion){
         horaActual = horaActual + duracion;
     }
 }
-btnConfirmar.addEventListener("click", () => {
+btnConfirmar.addEventListener("click", async () => {
 
     const nombre = nombreCliente.value;
     const telefono = telefonoCliente.value;
     const fecha = fechaReserva.value;
 
-    if(nombre == "" || telefono == ""){
+    if(nombre == "" || telefono == "" || horariosSeleccionado == ""){
 
-        alert("Completá tu nombre y teléfono");
+        alert("Completá todos los datos del turno");
 
+        return;
+    }
+    const { error } = await supabaseCliente
+    .from("turnos")
+    .insert({
+        nombre: nombre,
+        telefono: telefono,
+        servicio: servicioReserva,
+        precio: precioReserva,
+        fecha: fecha,
+        horario: horariosSeleccionado,
+        duracion: duracionReserva,
+        estado: "confirmado"
+    });
+    if (error){
+        console.error("Error al guardar el turno:", error);
+        alert("Hubo un error al reservar el turno");
         return;
     }
     console.log("----TURNO----");
@@ -111,7 +146,9 @@ btnConfirmar.addEventListener("click", () => {
     <p>🧑${nombre}</p>
     <p>📱${telefono}</p>
     <strong>
-    Total: $${precioReserva.toLocaleString("AR")}
+    Total: $${precioReserva.toLocaleString("es-AR")}
     </strong>
     `;
+    resumenTurno.classList.add("visible");
+    console.log("mostrando confirmacion")
 });

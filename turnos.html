@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="turnos.js" defer></script>
     <title>Reservar turno | JM Barbería</title>
 </head>
@@ -17,8 +18,14 @@
             <a href="index.html#ubicacion">Ubicación</a>
         </nav>
     </header>
-    <div class="decoracion decoracion-izquierda">✂</div>
-    <div class="decoracion decoracion-derecha">💈</div>
+    <div class="mini-deco deco1">💈</div>
+<div class="mini-deco deco2">💈</div>
+<div class="mini-deco deco3">✂</div>
+<div class="mini-deco deco4">★</div>
+<div class="mini-deco deco5">💈</div>
+<div class="mini-deco deco6">★</div>
+    <div class="decoracion decoracion-izquierda">💈</div>
+    <div class="decoracion decoracion-derecha">✂</div>
     <main>
         <section class="turnos-pagina">
             <div id="elegirServicio">
@@ -26,10 +33,7 @@
             <p>
                 Elegí tu servicio, fecha y horario.
             </p>
-            <div class="selector-servicios">
-            
-                
-
+            <div class="selector-servicios">            
             <button
                 class="opcion-servicio"
                 data-servicio="Corte de pelo"
@@ -92,7 +96,7 @@
         </button>
 
             </div>
-            <div class="resumen-turno" id="resumen-Turno">
+            <div class="resumen-turno" id="resumenTurno">
             </div>
             </div>
         </section>

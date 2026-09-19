@@ -33,6 +33,7 @@ nav a {
 nav a:hover{
     color: #d4af37;
 }
+
 .hero{
     min-height: 600px;
     padding: 80px 8%;
@@ -40,7 +41,7 @@ nav a:hover{
     align-items: center;
     background-image:
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-    url("/img/fondo.jpeg");
+    url("./img/fondo.jpeg");
     background-size: cover;
     background-position: center 33%;
     background-attachment: fixed;
@@ -88,6 +89,7 @@ nav a:hover{
 }
 .servicios h2{
     font-size: 40px;
+    padding: 10px;
     margin-bottom: 50px;
 }
 .contenedor-servicios{
@@ -236,18 +238,21 @@ footer{
     min-height: 100vh;
     padding: 60px 8%;
     text-align: center;
-    background-color: radial-gradient(circle at top, #242424 0%, #151515 45%, #0f0f0f 100%),
-    radial-grandient(
-        circle at 85% 65%,
-        rgba(212,175,55,0.07),
-        transparent 30%
-    ),
-    linear-grandient(
-        135deg,
-        #0d0d0d,
-        #121212,
-        #0d0d0d,
-    );
+    background-color: 
+    red
+    radial-gradient(
+            circle at 50% 35%,
+            rgba(212, 175, 55, 0.10),
+            transparent 35%
+        ),
+        repeating-linear-gradient(
+            135deg,
+            rgba(255,255,255,0.015) 0px,
+            rgba(255,255,255,0.015) 1px,
+            transparent 1px,
+            transparent 12px
+        ),
+        #0b0b0b;
 
 }
 .paso-fecha h2::after,
@@ -403,11 +408,47 @@ footer{
     border-radius: 18px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 }
+.mini-deco{
+    position: fixed;
+    font-size: 35px;
+    opacity: 0.20;
+    pointer-events: none;
+    z-index: 0;
+}
+.deco1 {
+    top: 25%;
+    left: 10%;
+}
+
+.deco2 {
+    top: 35%;
+    right: 10%;
+}
+
+.deco3 {
+    top: 65%;
+    left: 20%;
+}
+
+.deco4 {
+    top: 75%;
+    right: 25%;
+}
+
+.deco5 {
+    top: 55%;
+    right: 7%;
+}
+
+.deco6 {
+    top: 82%;
+    left: 8%;
+}
 .decoracion{
     position: fixed;
     width: 220px;
     font-size: 220px;
-    opacity: 0.20;
+    opacity: 0.12;
     pointer-events: none;
     z-index: 0;
 }
@@ -417,7 +458,7 @@ footer{
     transform: rotate(-20deg);
 }
 .decoracion-derecha{
-    right: 5%;
+    right: 8%;
     top: 48%;
     transform: rotate(-20deg);
 }
@@ -429,7 +470,82 @@ footer{
         grid-template-columns: repeat(2,1fr);
     }
     .panel-reserva{
-        padding: 25px 15px;
-        margin: 20px auto;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
     }
+    .decoracion,
+    .mini-deco {
+        display: none;
+    }
+
+    .turnos-pagina {
+        padding: 35px 20px;
+    }
+
+    #elegirServicio h1 {
+        font-size: 30px;
+    }
+
+    #elegirServicio > p {
+        margin-top: 10px;
+        margin-bottom: 28px;
+    }
+
+    .selector-servicios {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .opcion-servicio {
+        width: 100%;
+        padding: 18px;
+    }
+
+    .panel-reserva {
+        margin-top: 25px;
+        padding: 25px 18px;
+    }
+}
+.turnos-pagina{
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(212, 175, 55, 0.16),
+            transparent 35%
+        ),
+        repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 12px
+        ),
+        #0b0b0b !important;
+}
+.resumen-turno{
+    display: none;
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #1d1d1d;
+    border: 1px solid #d4af37;
+    border-radius: 12px;
+    text-align: center;
+}
+.resumen-turno h2 {
+    color: #d4af37;
+    margin-bottom: 20px;
+}
+.resumen-turno p {
+    margin: 10px 0;
+}
+.resumen-turno strong {
+    display: block;
+    margin-top: 20px;
+    font-size:  20px;
+}
+.resumen-turno.visible{
+    display: block;
 }

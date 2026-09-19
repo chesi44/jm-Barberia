@@ -140,11 +140,11 @@ btnConfirmar.addEventListener("click", async () => {
 
     resumenTurno.innerHTML = `
     <h2>✅ Turno confirmado</h2>
-    <p>✂️ ${servicioReserva}</p>
-    <p>📅${fecha}</p>
-    <p>🕐${horariosSeleccionado}</p>
-    <p>🧑${nombre}</p>
-    <p>📱${telefono}</p>
+    <p> ${servicioReserva}</p>
+    <p>Fecha:${fecha}</p>
+    <p>Horario:${horariosSeleccionado}</p>
+    <p>Nombre:${nombre}</p>
+    <p>Telefono:${telefono}</p>
     <strong>
     Total: $${precioReserva.toLocaleString("es-AR")}
     </strong>

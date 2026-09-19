@@ -249,9 +249,9 @@ footer{
 }
 .aviso-deslizar{
     display: block;
-    margin-top: 12px;
+    margin-top: 15px;
     color: #888;
-    font-size: 13px;
+    font-size: 14px;
     text-align: center;
 }
 @media (max-width: 768px){
@@ -287,7 +287,7 @@ footer{
         display: block;
     }
     .contenedor-trabajos{
-        width: 90%;
+        width: 92%;
         margin:  0 auto;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
@@ -303,7 +303,12 @@ footer{
         display: none !important;
     }
     .aviso-deslizar{
-        display: none;
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
     }
 }
 

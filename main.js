@@ -2,31 +2,38 @@
 const trabajos = [
     {
         tipo: "video",
-        src: "img/video2.mp4"
+        src: "img/video2.mp4",
+        poster: "img/portada-video2.mp4"
     },
     {
         tipo: "imagen",
-        src: "img/corte5.jpeg"
+        src: "img/corte5.jpeg",
+        poster: "img/portada-corte5.jpeg"
     },
     {
         tipo: "imagen",
-        src: "img/corte3.jpeg"
+        src: "img/corte3.jpeg",
+        poster: "img/portada-corte3.jpeg"
     },
     {
         tipo: "video",
-        src: "img/video6.MOV"
+        src: "img/video6.MOV",
+        poster: "img/portada-video6.MOV"
     },
     {
         tipo: "imagen",
         src: "img/IMG_2114.jpeg",
+        poster: "img/portada-IMG_2114.jpeg"
     },
     {
         tipo: "video",
-        src: "img/video4.mov"
+        src: "img/video4.mov",
+        poster: "img/portada-video4.mov"
     },
     {
         tipo: "video",
-        src: "img/video3.mp4"
+        src: "img/video3.mp4",
+        poster: "img/portada-video3.mp4"
     },
 ];
 const contenedorTrabajo = document.getElementById("contenedorTrabajos");
@@ -41,8 +48,8 @@ trabajos.forEach((trabajo) => {
     contenedorTrabajo.appendChild(imagen);
 } else if (trabajo.tipo === "video"){
     const video = document.createElement("video");
-
     video.src = trabajo.src;
+    video.poster = trabajo.poster;
     video.controls = true;
     video.classList.add("imagen-trabajo");
 

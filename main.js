@@ -3,7 +3,7 @@ const trabajos = [
     {
         tipo: "video",
         src: "img/video2.mp4",
-        poster: "img/portada-video2.mp4"
+        poster: "img/portada-video2.jpeg"
     },
     {
         tipo: "imagen",
@@ -18,7 +18,7 @@ const trabajos = [
     {
         tipo: "video",
         src: "img/video6.MOV",
-        poster: "img/portada-video6.MOV"
+        poster: "img/portada-video6.jpeg"
     },
     {
         tipo: "imagen",
@@ -28,12 +28,12 @@ const trabajos = [
     {
         tipo: "video",
         src: "img/video4.mov",
-        poster: "img/portada-video4.mov"
+        poster: "img/portada-video4.jpeg"
     },
     {
         tipo: "video",
         src: "img/video3.mp4",
-        poster: "img/portada-video3.mp4"
+        poster: "img/portada-video3.jpeg"
     },
 ];
 const contenedorTrabajo = document.getElementById("contenedorTrabajos");

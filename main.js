@@ -1,8 +1,8 @@
 //INDEX
 const trabajos = [
     {
-        tipo: "imagen",
-        src: "img/corte1.jpeg"
+        tipo: "video",
+        src: "img/video2.mp4"
     },
     {
         tipo: "imagen",
@@ -13,18 +13,41 @@ const trabajos = [
         src: "img/corte3.jpeg"
     },
     {
+        tipo: "video",
+        src: "img/video6.MOV"
+    },
+    {
         tipo: "imagen",
-        src: "img/video1.mp4"
-    }
+        src: "img/IMG_2114.jpeg",
+    },
+    {
+        tipo: "video",
+        src: "img/video4.mov"
+    },
+    {
+        tipo: "video",
+        src: "img/video3.mp4"
+    },
 ];
 const contenedorTrabajo = document.getElementById("contenedorTrabajos");
-trabajos.forEach((trabajo) => {
+trabajos.forEach((trabajo) => { 
+    if (trabajo.tipo === "imagen"){
     const imagen = document.createElement("img");
+
     imagen.src = trabajo.src;
     imagen.alt = "Trabajo realizado en JM Barbería";
     imagen.classList.add("imagen-trabajo");
 
     contenedorTrabajo.appendChild(imagen);
+} else if (trabajo.tipo === "video"){
+    const video = document.createElement("video");
+
+    video.src = trabajo.src;
+    video.controls = true;
+    video.classList.add("imagen-trabajo");
+
+    contenedorTrabajo.appendChild(video);
+}
 });
 const botonSiguiente = document.getElementById("siguiente");
 const botonAnterior = document.getElementById("anterior");

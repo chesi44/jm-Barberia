@@ -29,6 +29,13 @@ const resumenTurno = document.getElementById("resumenTurno");
 fechaReserva.addEventListener("change", () => {
 
     const fechaElegida = new Date(fechaReserva.value + "T00:00:00");
+    const hoyComparacion = new Date();
+    hoyComparacion.setHours(0,0,0,0);
+    if (fechaElegida < hoyComparacion){
+        alert("No podés reservar una fecha pasada");
+        fechaReserva.value = "";
+        return;
+    }
     if(fechaElegida.getDay() === 0){
         alert("Los domingos la barbería está cerrada");
         fechaReserva.value = "";
@@ -38,7 +45,6 @@ fechaReserva.addEventListener("change", () => {
 
     generarHorariosReserva(duracionReserva);
 
-    console.log("fecha elegida:", fechaReserva.value);
 })
 opcionesServicio.forEach((boton) => {
 
@@ -65,21 +71,33 @@ function generarHorariosReserva(duracion){
 
     horariosReserva.innerHTML = "";
 
+    const ahora = new Date();
+    const fechaElegida = new Date(fechaReserva.value + "T00:00:00");
+
+    const esHoy = 
+    fechaElegida.getFullYear() === ahora.getFullYear() &&
+    fechaElegida.getMonth() === ahora.getMonth() &&
+    fechaElegida.getDate() === ahora.getDate();
+    console.log("la fecha elegida es hoy?", esHoy);
+    const minutosAhora = ahora.getHours() * 60 + ahora.getMinutes();
     let horaActual = 9 * 60;
     let horaCierre = 20 * 60;
 
     while (horaActual + duracion <= horaCierre){
-
+        
         const horas = Math.floor(horaActual / 60);
         const minutos = horaActual % 60;
         const horaTexto =
         `${horas.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}`;
         const botonHora = document.createElement("button");
-
         botonHora.type = "button";
         botonHora.textContent = horaTexto;
         botonHora.classList.add("boton-horario");
         
+        if (esHoy && horaActual <= minutosAhora){
+            botonHora.disabled = true;
+            botonHora.classList.add("horario-pasado");
+        }
         botonHora.addEventListener("click" , () => {
             horariosSeleccionado = horaTexto;
 

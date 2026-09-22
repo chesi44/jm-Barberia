@@ -296,21 +296,19 @@ footer{
     }
     .carrusel-trabajos{
         width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 6px;
+        position: relative;
+        display: block;
     }
     .contenedor-trabajos{
         width: 100%;
-        gap: 10px;
-        margin:  0 auto;
+        gap: 12px;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
     }
     .imagen-trabajo{
-        flex: 0 0 70%;
-        width: 70%;
-        height: 320px;
+        flex: 0 0 88%;
+        width: 88%;
+        height: 420px;
         object-fit: cover;
         scroll-snap-align: start;
     }
@@ -322,9 +320,18 @@ footer{
         font-size: 14px;
     }
     .flecha-carrusel {
-    width: 28px;
-    height: 28px;
-    font-size: 19px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+}
+#anterior {
+    left: 10px;
+}
+#siguiente {
+    right: 10px;
 }
 }
 
@@ -575,6 +582,10 @@ footer{
 }
 
 @media (max-width: 768px) {
+    .trabajos{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
     .selector-servicios{
         flex-direction: column;
     }

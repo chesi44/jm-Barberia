@@ -15,7 +15,7 @@ const elegirServicio = document.getElementById("elegirServicio");
 const fechaReserva = document.getElementById("fechaReserva");
 const hoy = new Date();
 const anio = hoy.getFullYear();
-const mes = String(hoy.getMonth() + 1.).padStart(2,"0");
+const mes = String(hoy.getMonth() + 1).padStart(2,"0");
 const dia = String(hoy.getDate()).padStart(2,"0");
 fechaReserva.min = `${anio}-${mes}-${dia}`;
 const pasoHorarios = document.getElementById("pasoHorarios");
@@ -26,7 +26,7 @@ const telefonoCliente = document.getElementById("telefonoCliente");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const resumenTurno = document.getElementById("resumenTurno");
 
-fechaReserva.addEventListener("change", () => {
+fechaReserva.addEventListener("change", async () => {
 
     const fechaElegida = new Date(fechaReserva.value + "T00:00:00");
     const hoyComparacion = new Date();
@@ -43,9 +43,16 @@ fechaReserva.addEventListener("change", () => {
     }
     pasoHorarios.classList.add("visible");
 
-    generarHorariosReserva(duracionReserva);
+    const ocupados = await obtenerHorariosOcupados(fechaReserva.value);
+    console.log("Turnos ocupados recibidos:", ocupados);
 
-})
+    generarHorariosReserva(duracionReserva, ocupados)
+
+});
+function horaAMinutos(hora){
+        const[horas, minutos] = hora.split(":").map(Number);
+        return horas * 60 + minutos;
+    }
 opcionesServicio.forEach((boton) => {
 
     boton.addEventListener("click", () => {
@@ -67,7 +74,21 @@ opcionesServicio.forEach((boton) => {
         console.log(duracion);
     });
 });
-function generarHorariosReserva(duracion){
+async function obtenerHorariosOcupados(fecha){
+    const {data, error} = await supabaseCliente.rpc(
+        "obtener_horarios_ocupados",
+        {
+            fecha_consulta: fecha
+        }
+    );
+    if (error) {
+        console.error("Error al obtener horarios ocupados:", error);
+        return [];
+    }
+    console.log("Horarios ocupados:", data);
+        return data;
+}
+function generarHorariosReserva(duracion, ocupados){
 
     horariosReserva.innerHTML = "";
 
@@ -84,7 +105,6 @@ function generarHorariosReserva(duracion){
     let horaCierre = 20 * 60;
 
     while (horaActual + duracion <= horaCierre){
-        
         const horas = Math.floor(horaActual / 60);
         const minutos = horaActual % 60;
         const horaTexto =
@@ -93,6 +113,20 @@ function generarHorariosReserva(duracion){
         botonHora.type = "button";
         botonHora.textContent = horaTexto;
         botonHora.classList.add("boton-horario");
+        const estaOcupado = ocupados.some((turno) => {
+            const inicioOcupado = horaAMinutos(turno.horario);
+            const finOcupado = inicioOcupado + Number(turno.duracion);
+
+            const inicioNuevo = horaActual;
+            const finNuevo = horaActual + duracion;
+
+            return inicioNuevo < finOcupado && finNuevo > inicioOcupado;
+
+        });
+        if (estaOcupado){
+            botonHora.disabled = true;
+            botonHora.classList.add("horario-ocupado");
+        }
         
         if (esHoy && horaActual <= minutosAhora){
             botonHora.disabled = true;

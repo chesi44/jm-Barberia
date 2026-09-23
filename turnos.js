@@ -165,30 +165,27 @@ btnConfirmar.addEventListener("click", async () => {
 
         return;
     }
-    const { error } = await supabaseCliente
-    .from("turnos")
-    .insert({
-        nombre: nombre,
-        telefono: telefono,
-        servicio: servicioReserva,
-        precio: precioReserva,
-        fecha: fecha,
-        horario: horariosSeleccionado,
-        duracion: duracionReserva,
-        estado: "confirmado"
-    });
+    const {data , error} = await supabaseCliente.rpc(
+        "crear_turno",
+        {
+        p_nombre: nombre,
+        p_telefono: telefono,
+        p_servicio: servicioReserva,
+        p_precio: precioReserva,
+        p_fecha: fecha,
+        p_horario: horariosSeleccionado,
+        p_duracion: duracionReserva
+        }
+    );
     if (error){
         console.error("Error al guardar el turno:", error);
         alert("Hubo un error al reservar el turno");
         return;
     }
-    console.log("----TURNO----");
-    console.log("Cliente:", nombre);
-    console.log("Teléfono:", telefono);
-    console.log("Servicio:", servicioReserva);
-    console.log("Precio:", precioReserva);
-    console.log("Fecha:", fecha);
-    console.log("Horario", horariosSeleccionado)
+    if (data === false){
+        alert("Ese horario acaba de ser reservado. Elegí otro horario.");
+        return
+    }
 
     resumenTurno.innerHTML = `
     <h2>✅ Turno confirmado</h2>

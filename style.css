@@ -103,7 +103,7 @@ nav a:hover{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-    width: 600px;
+    width: 100%;
 }
 
 .resumen-servicio {
@@ -111,10 +111,10 @@ nav a:hover{
     min-height: 135px;
     padding: 25px;
     box-sizing: border-box;
-background: #181818;
-border: 1px solid #2c2c2c;
-border-radius: 14px;
-position: relative;
+    background: #181818;
+    border: 1px solid #2c2c2c;
+    border-radius: 14px;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -925,10 +925,11 @@ footer{
 }
 #graficoFinanzas{
     display: grid;
-    grid-template-columns: 380px 600px;
+    grid-template-columns: 380px 1fr;
     gap: 40px;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
     padding: 40px 30px;
 }
 
@@ -1019,10 +1020,10 @@ footer{
 
     #graficoFinanzas{
     display: grid;
-    grid-template-columns: 380px 1fr;
-    gap: 35px;
+    grid-template-columns: 1fr;
+    gap: 20px;
     align-items: stretch;
-    padding: 30px;
+    padding: 20px 0;
     }
     .contenedor-grafico{
         width: 240px;

@@ -88,39 +88,66 @@
 
                     <div id="graficoFinanzas">
 
-                            <div class="contenedor-grafico">
-                                <canvas id="graficoServicios"></canvas>
-                            </div>
+                            <div class="finanzas-grafico">
 
-                        <div class="resumen-servicios"></div>
-                        
-                        <div class="admin-card">
-                        
-                            <span>INGRESOS DEL MES</span>                        
-                            <strong id="ingresosMes">$0</strong>
-                        
-                            <p>Facturación mensual</p>
-                        </div>    
+        <div class="contenedor-grafico">
+            <canvas id="graficoServicios"></canvas>
+        </div>
 
-                        <div class="resumen-servicio">
-                            <span>Corte de pelo</span>
-                            <strong id="totalCorte">$0</strong>
-                        </div>
+        <div class="ingreso-mensual">
+            <span>INGRESOS DEL MES</span>
+            <strong id="ingresosMes">$0</strong>
+            <p>Facturación mensual</p>
+        </div>
 
-                        <div class="resumen-servicio">
-                            <span>Corte + Barba</span>
-                            <strong id="totalCorteBarba">$0</strong>
-                        </div>
+    </div>
 
-                        <div class="resumen-servicio">
-                            <span>Color / Claritos</span>
-                            <strong id="totalColor">$0</strong>
-                        </div>
-                        <div class="resumen-servicio resumen-cancelados">
-                            <span>Turnos cancelados</span>
-                            <strong id="totalCancelados">$0</strong>
-                        </div>
-                    </div>
+
+    <!-- LADO DERECHO -->
+    <div class="resumen-servicios">
+
+        <div class="resumen-servicio servicio-corte">
+            <div>
+                <span>CORTE DE PELO</span>
+                <p>Facturación mensual</p>
+            </div>
+
+            <strong id="totalCorte">$0</strong>
+        </div>
+
+
+        <div class="resumen-servicio servicio-barba">
+            <div>
+                <span>CORTE + BARBA</span>
+                <p>Facturación mensual</p>
+            </div>
+
+            <strong id="totalCorteBarba">$0</strong>
+        </div>
+
+
+        <div class="resumen-servicio servicio-color">
+            <div>
+                <span>COLOR / CLARITOS</span>
+                <p>Facturación mensual</p>
+            </div>
+
+            <strong id="totalColor">$0</strong>
+        </div>
+
+
+        <div class="resumen-servicio servicio-cancelados">
+            <div>
+                <span>TURNOS CANCELADOS</span>
+                <p>Este mes</p>
+            </div>
+
+            <strong id="totalCancelados">0</strong>
+        </div>
+
+    </div>
+
+</div>
                 </section>
             </div>
         </section>

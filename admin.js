@@ -46,7 +46,7 @@ btnLogin.addEventListener("click", async () => {
     adminLogin.style.display = "none";
     adminPanel.classList.add("visible");
     cargarTurnosHoy();
-    cargarTurnosCancelados();
+    //cargarTurnosCancelados();
     cargarResumenMes();
 });
     async function cargarTurnosCancelados() {

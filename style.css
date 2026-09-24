@@ -99,6 +99,103 @@ nav a:hover{
     ),
     #080808;
 }
+.resumen-servicios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 600px;
+}
+
+.resumen-servicio {
+    width: 100%;
+    min-height: 135px;
+    padding: 25px;
+    box-sizing: border-box;
+background: #181818;
+border: 1px solid #2c2c2c;
+border-radius: 14px;
+position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: .25s;
+}
+
+.resumen-servicio:hover {
+    transform: translateY(-3px);
+    border-color: #444;
+}
+
+.resumen-servicio span {
+    color: #ddd;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.resumen-servicio p {
+    color: #777;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.resumen-servicio strong {
+    font-size: 27px;
+    margin-top: 20px;
+}
+
+
+/* detalle de color arriba de cada tarjeta */
+
+.resumen-servicio::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: 20px;
+    right: 20px;
+
+    height: 3px;
+    border-radius: 10px;
+}
+
+
+/* mismos colores que tu gráfico */
+
+.servicio-corte::before {
+    background: #12d3ff;
+}
+
+.servicio-corte strong {
+    color: #12d3ff;
+}
+
+
+.servicio-barba::before {
+    background: #ff0a0a;
+}
+
+.servicio-barba strong {
+    color: #ff5a5a;
+}
+
+
+.servicio-color::before {
+    background: #fbff18;
+}
+
+.servicio-color strong {
+    color: #fbff18;
+}
+
+
+.servicio-cancelados::before {
+    background: #e57373;
+}
+
+.servicio-cancelados strong {
+    color: #e57373;
+}
 .servicios h2{
     font-size: 40px;
     padding: 10px;
@@ -827,53 +924,58 @@ footer{
     letter-spacing: 1px;
 }
 #graficoFinanzas{
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    padding: 25px 0;
-}
-.contenedor-grafico{
-    width: 280px;
-    height: 280px;
-    flex-shrink: 0;
-}
-.resumen-servicios{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-.resumen-servicio{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 550px;
-}
-.resumen-servicio strong{
-    color: #d4af37;
-}
-.ingreso-mensual{
-    padding: 15px 0;
-    border-bottom: 1px solid #292929;
-    margin-bottom: 5px;
-}
-.ingreso-mensual span {
-    display: block;
-    color: #888;
-    font-size: 12px;
-    letter-spacing: 1px;
+    grid-template-columns: 380px 600px;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 30px;
 }
 
-.ingreso-mensual strong{
+
+.finanzas-grafico {
+    background: #141414;
+    border: 1px solid #2c2c2c;
+    border-radius: 16px;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-grafico {
+    width: 320px;
+    height: 320px;
+    position: relative;
+}
+
+.ingreso-mensual {
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 20px;
+
+    border-top: 1px solid #292929;
+    text-align: center;
+}
+
+.ingreso-mensual span {
+    color: #888;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.ingreso-mensual strong {
     display: block;
+
     color: #d4af37;
-    font-size: 28px;
-    margin: 7px 0 3px;
+    font-size: 34px;
+
+    margin: 8px 0 4px;
 }
 
 .ingreso-mensual p {
-    color: #777;
-    font-size: 13px;
+    color: #888;
     margin: 0;
 }
 @media (max-width: 768px){
@@ -916,9 +1018,11 @@ footer{
     }
 
     #graficoFinanzas{
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 35px;
+    align-items: stretch;
+    padding: 30px;
     }
     .contenedor-grafico{
         width: 240px;
@@ -931,10 +1035,7 @@ footer{
         flex-direction: column;
         gap: 10px;
     }
-    .ingreso-mensual{
-        width: 100%;
-        box-sizing: border-box;
-    }
+    
     .resumen-servicio{
         width: 100%;
         max-width: none;

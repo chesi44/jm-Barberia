@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel JM Barbería</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <main class="admin-pagina">
+
+        <div class="admin-login">
+
+            <img src="img/logo2.jpeg" alt="JM Barbería" class="admin-logo">
+
+            <h1>Panel de administración</h1>
+            <p>Ingresá para administrar la barbería</p>
+
+            <label for="adminEmail">Email</label>
+            <input type="email"
+            id="adminEmail"
+            placeholder="Email"
+            >
+            <label for="adminPassword">Contraseña</label>
+            <input type="password"
+            id="adminPassword"
+            placeholder="Contraseña"
+            >
+
+            <button type="button" id="btnLogin" class="boton">
+                INGRESAR
+            </button>
+            
+        </div>
+        <section class="admin-panel" id="adminPanel">
+            
+            <div class="admin-encabezado">
+
+                <div>
+                    <p class="admin-subtitulo">JM BARBERÍA</p>
+                    <h1>Panel de administración</h1>
+                    <p>Resumen del negocio</p>
+                </div>
+
+                <button id="btnCerrarSesion" class="btn-cerrar-sesion">
+                    Cerrar sesión
+                </button>
+            </div>
+
+            <div class="admin-estadisticas">
+
+                <div class="admin-card">
+                    <span>TURNOS DE HOY</span>
+                    <strong id="turnosHoy">$0</strong>
+                    <p>Reservas confirmadas</p>
+                </div>
+                <div class="admin-card">
+                    <span>INGRESOS DE HOY</span>
+                    <strong id="ingresosHoy">$0</strong>
+                    <p>Facturación del día</p>
+                </div>
+
+            </div>
+
+            <div class="admin-contenido">
+                
+                <section class="admin-bloque">
+                    <div class="admin-bloque-titulo">
+                        <div>
+                            <span>AGENDA</span>
+                            <h2>Turnos de hoy</h2>
+                        </div>
+                    </div>
+
+                    <div id="listaTurnosHoy">
+                        <p class="admin-vacio">Todavía no hay turnos para mostrar.</p>
+                    </div>
+                </section>
+
+                <section class="admin-bloque">
+                    <div class="admin-bloque-titulo">
+                        <div>
+                            <span>FINANZAS</span>
+                            <h2>Resumen mensual</h2>
+                        </div>
+                    </div>
+
+                    <div id="graficoFinanzas">
+
+                            <div class="contenedor-grafico">
+                                <canvas id="graficoServicios"></canvas>
+                            </div>
+
+                        <div class="resumen-servicios"></div>
+                        
+                        <div class="admin-card">
+                        
+                            <span>INGRESOS DEL MES</span>                        
+                            <strong id="ingresosMes">$0</strong>
+                        
+                            <p>Facturación mensual</p>
+                        </div>    
+
+                        <div class="resumen-servicio">
+                            <span>Corte de pelo</span>
+                            <strong id="totalCorte">$0</strong>
+                        </div>
+
+                        <div class="resumen-servicio">
+                            <span>Corte + Barba</span>
+                            <strong id="totalCorteBarba">$0</strong>
+                        </div>
+
+                        <div class="resumen-servicio">
+                            <span>Color / Claritos</span>
+                            <strong id="totalColor">$0</strong>
+                        </div>
+                        <div class="resumen-servicio resumen-cancelados">
+                            <span>Turnos cancelados</span>
+                            <strong id="totalCancelados">$0</strong>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

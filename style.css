@@ -896,6 +896,106 @@ footer{
     color: #ddd;
     font-weight: bold;
 }
+.admin-pagina {
+    min-height: 100vh;
+
+    background:
+    radial-gradient(
+        circle at center,
+        rgba(212, 175, 55, 0.35) 0%,
+        #0b0b0b 60%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+.admin-login{
+    width: 100%;
+    max-width: 420px;
+    background: #141414;
+    border: 1px solid #2c2c2c;
+    border-radius: 18px;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+}
+.admin-logo{
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+.login-campo{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.login-campo label{
+    color: #ccc;
+    font-size: 14px;
+    font-weight: 600;
+}
+.login-campo input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    background: #0d0d0d;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+}
+.login-campo input:focus{
+    border-color: #d4af37;
+}
+
+.password-contenedor{
+    position: relative;
+}
+.password-contenedor input {
+    padding-right: 50px;
+}
+.password-ojo{
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+    opacity: 0.8;
+}
+.password-ojo:hover{
+    color: #d4af37;
+    opacity: 1;
+}
+.login-etiqueta,
+.admin-login h1{
+    font-size: 26px;
+    margin: 4px 0;
+    text-align: center;
+}
+.login-subtitulo{
+    text-align: center;
+}
+.login-footer{
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin: 2px 0 0;
+}
 .btn-cancelar-turno{
         padding: 9px 14px;
         background: transparent;

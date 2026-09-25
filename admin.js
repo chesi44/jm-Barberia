@@ -290,3 +290,11 @@ async function cargarResumenMes(){
         
     });
 }
+const mostrarPassword = document.getElementById("mostrarPassword");
+mostrarPassword.addEventListener("click", () => {
+    if (adminPassword.type === "password"){
+        adminPassword.type = "text";
+    } else {
+        adminPassword.type = "password";
+    }
+})

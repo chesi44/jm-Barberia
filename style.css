@@ -1083,6 +1083,11 @@ footer{
     .admin-panel{
         padding: 30px 20px;
     }
+    .admin-pagina{
+        height: 100dvh;
+        min-height: 100dvh;
+        overflow: hidden;
+    }
     .admin-encabezado{
         align-items: flex-start;
         gap: 20px;

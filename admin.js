@@ -298,3 +298,14 @@ mostrarPassword.addEventListener("click", () => {
         adminPassword.type = "password";
     }
 })
+const btnCerrarSesion = document.getElementById("btnCerrarSesion");
+
+btnCerrarSesion.addEventListener("click", async() => {
+    const { error } = await supabaseCliente.auth.signOut();
+
+    if (error){
+        console.error("Error al cerrar sesión:", error);
+        return;
+    }
+    location.reload();
+});

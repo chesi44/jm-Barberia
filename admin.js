@@ -19,6 +19,10 @@ const totalCorteHTML = document.getElementById("totalCorte");
 const totalCorteBarbaHTML = document.getElementById("totalCorteBarba");
 const totalColorHTML = document.getElementById("totalColor");
 const totalCanceladosHTML = document.getElementById("totalCancelados");
+const listaHistorial = document.getElementById("listaHistorial");
+const historialTurnos = document.getElementById("historialTurnos");
+const historialCancelados = document.getElementById("historialCancelados");
+const historialFacturacion = document.getElementById("historialFacturacion");
 const listaTurnosCancelados =
     document.getElementById("listaTurnosCancelados");
 
@@ -48,6 +52,7 @@ btnLogin.addEventListener("click", async () => {
     cargarTurnosHoy();
     //cargarTurnosCancelados();
     cargarResumenMes();
+    cargarHistorialHoy();
 });
     async function cargarTurnosCancelados() {
         const hoy = new Date();
@@ -290,6 +295,60 @@ async function cargarResumenMes(){
         
     });
 }
+async function cargarHistorialHoy() {
+
+    const hoy = new Date();
+
+    const fechaHoy =
+        `${hoy.getFullYear()}-` +
+        `${String(hoy.getMonth() + 1).padStart(2, "0")}-` +
+        `${String(hoy.getDate()).padStart(2, "0")}`;
+
+    const { data, error } = await supabaseCliente
+        .from("turnos")
+        .select("*")
+        .eq("fecha", fechaHoy)
+        .order("horario", { ascending: true });
+
+    if (error) {
+        console.error("Error al cargar historial:", error);
+        return;
+    }
+
+    listaHistorial.innerHTML = "";
+
+    let cancelados = 0;
+    let facturacion = 0;
+
+    data.forEach((turno) => {
+
+        if (turno.estado === "cancelado") {
+            cancelados++;
+        } else {
+            facturacion += Number(turno.precio);
+        }
+
+        const fila = document.createElement("tr");
+
+        fila.innerHTML = `
+            <td>${turno.fecha}</td>
+            <td>${turno.horario.slice(0, 5)}</td>
+            <td>${turno.nombre}</td>
+            <td>${turno.servicio}</td>
+            <td>$${Number(turno.precio).toLocaleString("es-AR")}</td>
+            <td>${turno.estado}</td>
+        `;
+
+        listaHistorial.appendChild(fila);
+    });
+
+    historialTurnos.textContent = data.length;
+    historialCancelados.textContent = cancelados;
+    historialFacturacion.textContent =
+        `$${facturacion.toLocaleString("es-AR")}`;
+}
+
+
 const mostrarPassword = document.getElementById("mostrarPassword");
 
 mostrarPassword.addEventListener("click", () => {

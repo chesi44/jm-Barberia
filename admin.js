@@ -23,6 +23,7 @@ const listaHistorial = document.getElementById("listaHistorial");
 const historialTurnos = document.getElementById("historialTurnos");
 const historialCancelados = document.getElementById("historialCancelados");
 const historialFacturacion = document.getElementById("historialFacturacion");
+const fechaHistorial = document.getElementById("fechaHistorial");
 const listaTurnosCancelados =
     document.getElementById("listaTurnosCancelados");
 
@@ -52,7 +53,7 @@ btnLogin.addEventListener("click", async () => {
     cargarTurnosHoy();
     //cargarTurnosCancelados();
     cargarResumenMes();
-    cargarHistorialHoy();
+    cargarHistorial("hoy");
 });
     async function cargarTurnosCancelados() {
         const hoy = new Date();
@@ -295,19 +296,75 @@ async function cargarResumenMes(){
         
     });
 }
-async function cargarHistorialHoy() {
-
+async function cargarHistorial(filtro = "hoy") {
     const hoy = new Date();
 
-    const fechaHoy =
-        `${hoy.getFullYear()}-` +
-        `${String(hoy.getMonth() + 1).padStart(2, "0")}-` +
-        `${String(hoy.getDate()).padStart(2, "0")}`;
+    let desde;
+    let hasta;
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(filtro)) {
+    const [anio, mes, dia] = filtro.split("-");
+
+    desde = new Date(anio, mes - 1, dia);
+    hasta = new Date(anio, mes - 1, dia);
+}
+    if (filtro === "hoy") {
+        desde = new Date(hoy);
+        hasta = new Date(hoy);
+    }
+
+    if (filtro === "ayer") {
+        desde = new Date(hoy);
+        desde.setDate(hoy.getDate() - 1);
+
+        hasta = new Date(desde);
+    }
+
+    if (filtro === "mes") {
+        desde = new Date(
+            hoy.getFullYear(),
+            hoy.getMonth(),
+            1
+        );
+
+        hasta = new Date(
+            hoy.getFullYear(),
+            hoy.getMonth() + 1,
+            0
+        );
+    }
+
+    if (filtro === "anio") {
+        desde = new Date(
+            hoy.getFullYear(),
+            0,
+            1
+        );
+
+        hasta = new Date(
+            hoy.getFullYear(),
+            11,
+            31
+        );
+    }
+
+    const formatearFecha = (fecha) => {
+        return (
+            `${fecha.getFullYear()}-` +
+            `${String(fecha.getMonth() + 1).padStart(2, "0")}-` +
+            `${String(fecha.getDate()).padStart(2, "0")}`
+        );
+    };
+
+    const fechaDesde = formatearFecha(desde);
+    const fechaHasta = formatearFecha(hasta);
 
     const { data, error } = await supabaseCliente
         .from("turnos")
         .select("*")
-        .eq("fecha", fechaHoy)
+        .gte("fecha", fechaDesde)
+        .lte("fecha", fechaHasta)
+        .order("fecha", { ascending: false })
         .order("horario", { ascending: true });
 
     if (error) {
@@ -320,8 +377,7 @@ async function cargarHistorialHoy() {
     let cancelados = 0;
     let facturacion = 0;
 
-    data.forEach((turno) => {
-
+        data.forEach((turno) => {
         if (turno.estado === "cancelado") {
             cancelados++;
         } else {
@@ -336,7 +392,11 @@ async function cargarHistorialHoy() {
             <td>${turno.nombre}</td>
             <td>${turno.servicio}</td>
             <td>$${Number(turno.precio).toLocaleString("es-AR")}</td>
-            <td>${turno.estado}</td>
+            <td>
+            <span class="estado-turno ${turno.estado.toLowerCase()}">
+            ${turno.estado}
+            </span>
+            </td>
         `;
 
         listaHistorial.appendChild(fila);
@@ -346,8 +406,25 @@ async function cargarHistorialHoy() {
     historialCancelados.textContent = cancelados;
     historialFacturacion.textContent =
         `$${facturacion.toLocaleString("es-AR")}`;
-}
+}   
+const botonesHistorial = document.querySelectorAll(".filtro-historial");
 
+botonesHistorial.forEach((boton) => {
+    boton.addEventListener("click", () => {
+
+        botonesHistorial.forEach((btn) => {
+            btn.classList.remove("activo");
+        });
+        boton.classList.add("activo");
+        const filtro = boton.dataset.filtro;
+        cargarHistorial(filtro);
+    });
+});
+fechaHistorial.addEventListener("change", () => {
+    const fechaElegida = fechaHistorial.value;
+
+    cargarHistorial(fechaElegida);
+});
 
 const mostrarPassword = document.getElementById("mostrarPassword");
 
@@ -369,3 +446,23 @@ btnCerrarSesion.addEventListener("click", async() => {
     }
     location.reload();
 });
+const canalTurnos = supabaseCliente
+    .channel("cambios-turnos")
+    .on(
+        "postgres_changes",
+        {
+            event: "*",
+            schema: "public",
+            table: "turnos"
+        },
+        (payload) => {
+            console.log("Cambio en turnos:", payload);
+
+            cargarTurnosHoy();
+            cargarResumenMes();
+            cargarHistorial("hoy");
+        }
+    )
+    .subscribe((estado) => {
+        console.log("Realtime:", estado);
+    });

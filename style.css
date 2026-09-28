@@ -897,8 +897,7 @@ footer{
     font-weight: bold;
 }
 .admin-pagina {
-   
-    background:
+        background:
     radial-gradient(
         circle at center,
         rgba(212, 175, 55, 0.35) 0%,
@@ -1022,6 +1021,26 @@ footer{
     font-weight: bold;
     letter-spacing: 1px;
 }
+.estado-turno {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.estado-turno.confirmado {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.estado-turno.cancelado {
+    color: #ff6464;
+    background: rgba(255, 100, 100, 0.12);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+}
 #graficoFinanzas{
     display: grid;
     grid-template-columns: 380px 1fr;
@@ -1078,11 +1097,21 @@ footer{
     color: #888;
     margin: 0;
 }
+
 @media (max-width: 768px){
-    .admin-panel{
-        padding: 30px 20px;
+
+    .admin-panel,
+    .admin-contenido,
+    .admin-bloque{
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
-    
+    .admin-card{
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
     .admin-encabezado{
         align-items: flex-start;
         gap: 20px;
@@ -1094,9 +1123,9 @@ footer{
     .admin-encabezado h1{
         font-size: 30px;
     }
-    .admin-estadisticas,
-    .admin-contenido{
+    .admin-estadisticas{
         grid-template-columns: 1fr;
+        width: 100%;
     }
     .btn-cerrar-sesion{
         width: 100%;
@@ -1149,8 +1178,25 @@ footer{
         border: 1px solid #292929;
         border-radius: 8px;
     }
+    .historial-resumen{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .historial-stat{
+        padding: 14px 12px;
+    }
+    .historial-stat span{
+        font-size: 12px;
+    }
+    .historial-stat:last-child{
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+    .historial-tabla-contenedor{
+        max-height: 350px;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
 }
-/* ===== HISTORIAL ===== */
 
 .historial-bloque {
     margin-top: 30px;
@@ -1161,16 +1207,15 @@ footer{
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 }
 
 .historial-encabezado h2 {
-    margin: 0;
-    font-size: 28px;
+    margin: 0 0 6px;
 }
 
 .historial-encabezado p {
-    margin: 6px 0 0;
+    margin: 0 0 16px;
     color: #888;
 }
 
@@ -1178,6 +1223,7 @@ footer{
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    margin-bottom: 18px;
 }
 
 .filtro-historial {
@@ -1223,6 +1269,8 @@ footer{
 .historial-tabla-contenedor {
     width: 100%;
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 420px;
 }
 
 .historial-tabla {
@@ -1242,4 +1290,68 @@ footer{
     color: #d4af37;
     font-size: 13px;
     text-transform: uppercase;
+}
+
+.buscar-fecha-historial{
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 220px;
+}
+
+.buscar-fecha-historial label{
+    color: #aaa;
+    font-size: 13px;
+    font-weight: 600;
+}
+.fecha-historial{
+    width: 220px;
+    padding: 12px 14px;
+
+    background: #111;
+    color: white;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    font-family: inherit;
+    color-scheme: dark;
+}
+.fecha-historial:focus{
+    outline: none;
+    border-color: #d4af37;
+}
+.historial-bloque h2 {
+    margin-bottom: 6px;
+}
+
+.historial-bloque > p {
+    margin-bottom: 18px;
+}
+
+.historial-filtros {
+    margin-top: 12px;
+    margin-bottom: 18px;
+}
+
+.buscar-fecha-historial {
+    margin-top: 16px;
+    margin-bottom: 26px;
+}
+
+.fecha-historial {
+    margin: 8px 0 0;
+}
+.historial-titulo {
+    margin-bottom: 18px;
+}
+
+.historial-titulo h2 {
+    margin: 0 0 6px;
+}
+
+.historial-titulo p {
+    margin: 0;
+    color: #888;
 }

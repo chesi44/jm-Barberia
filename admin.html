@@ -178,12 +178,12 @@
     </div>
 
 </div>
-      </section>
+    </section>
 
         <section class="admin-bloque historial-bloque">
             <div class="historial-encabezado">        
             </div>
-            <div>
+            <div class="historial-titulo">
             <h2>Historial de turnos</h2>
             <p>Consultá la actividad de la barbería</p>
             </div>
@@ -201,6 +201,46 @@
                     Este año
                 </button>
             </div>
+            <label for="fechaHistorial">Buscar por fecha</label>
+            <div class="buscar-fecha-historial">
+            <input type="date"
+            id="fechaHistorial"
+            class="fecha-historial"
+            >
+            </div>
+            <div class="historial-resumen">
+    <div class="historial-stat">
+        <span>Turnos</span>
+        <strong id="historialTurnos">0</strong>
+    </div>
+
+    <div class="historial-stat">
+        <span>Cancelados</span>
+        <strong id="historialCancelados">0</strong>
+    </div>
+
+    <div class="historial-stat">
+        <span>Facturación</span>
+        <strong id="historialFacturacion">$0</strong>
+    </div>
+</div>
+
+<div class="historial-tabla-contenedor">
+    <table class="historial-tabla">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Cliente</th>
+                <th>Servicio</th>
+                <th>Precio</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaHistorial"></tbody>
+    </table>
+</div>
         </section>
 
             </div>

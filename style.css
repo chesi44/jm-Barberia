@@ -1097,7 +1097,9 @@ footer{
     color: #888;
     margin: 0;
 }
-
+.historial-celular{
+    display: none;
+}
 @media (max-width: 768px){
 
     .admin-panel,
@@ -1192,10 +1194,127 @@ footer{
         text-align: center;
     }
     .historial-tabla-contenedor{
-        max-height: 350px;
-        overflow-y: auto;
-        overflow-x: auto;
+        display: none;
     }
+    .historial-tabla {
+    min-width: 0;
+    width: 100%;
+}
+
+.historial-tabla thead {
+    display: none;
+}
+
+.historial-tabla,
+.historial-tabla tbody,
+.historial-tabla tr,
+.historial-tabla td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.historial-tabla tr {
+    position: relative;
+    background: #111;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 15px;
+}
+
+.historial-tabla td {
+    padding: 0;
+    border: none;
+}
+
+/* Fecha */
+.historial-tabla td:nth-child(1) {
+    color: #888;
+    font-size: 12px;
+}
+
+/* Hora */
+.historial-tabla td:nth-child(2) {
+    color: #d4af37;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Cliente */
+.historial-tabla td:nth-child(3) {
+    font-weight: 600;
+}
+
+/* Servicio */
+.historial-tabla td:nth-child(4) {
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* Precio */
+.historial-tabla td:nth-child(5) {
+    grid-column: 2;
+    grid-row: 2;
+    font-weight: 700;
+    text-align: right;
+}
+
+/* Estado */
+.historial-tabla td:nth-child(6) {
+    grid-column: 2;
+    grid-row: 3;
+    text-align: right;
+}
+.historial-celular{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+.historial-card {
+    background: #111;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.historial-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.historial-card-top > strong {
+    color: #d4af37;
+    font-size: 20px;
+}
+
+.historial-card h3 {
+    margin: 14px 0 8px;
+    font-size: 18px;
+    color: white;
+}
+
+.historial-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #999;
+    font-size: 14px;
+}
+
+.historial-card-precio {
+    display: block;
+    margin-top: 14px;
+    font-size: 19px;
+    color: white;
+}
 }
 
 .historial-bloque {

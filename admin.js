@@ -373,14 +373,16 @@ async function cargarHistorial(filtro = "hoy") {
     }
 
     listaHistorial.innerHTML = "";
-
+    historialCelular.innerHTML= ""
     let cancelados = 0;
     let facturacion = 0;
+    let confirmados = 0;
 
         data.forEach((turno) => {
         if (turno.estado === "cancelado") {
             cancelados++;
         } else {
+            confirmados ++;
             facturacion += Number(turno.precio);
         }
 
@@ -400,9 +402,34 @@ async function cargarHistorial(filtro = "hoy") {
         `;
 
         listaHistorial.appendChild(fila);
+        const tarjeta = document.createElement("div");
+tarjeta.classList.add("historial-card");
+
+tarjeta.innerHTML = `
+    <div class="historial-card-top">
+        <strong>${turno.horario.slice(0, 5)}</strong>
+
+        <span class="estado-turno ${turno.estado.toLowerCase()}">
+            ${turno.estado}
+        </span>
+    </div>
+
+    <h3>${turno.nombre}</h3>
+
+    <div class="historial-card-info">
+        <span>${turno.fecha}</span>
+        <span>${turno.servicio}</span>
+    </div>
+
+    <strong class="historial-card-precio">
+        $${Number(turno.precio).toLocaleString("es-AR")}
+    </strong>
+`;
+
+historialCelular.appendChild(tarjeta);
     });
 
-    historialTurnos.textContent = data.length;
+    historialTurnos.textContent = confirmados;
     historialCancelados.textContent = cancelados;
     historialFacturacion.textContent =
         `$${facturacion.toLocaleString("es-AR")}`;

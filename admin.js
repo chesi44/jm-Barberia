@@ -183,6 +183,7 @@ async function cargarTurnosHoy(){
                 $${Number(turno.precio).toLocaleString("es-AR")}
         </div>
 
+        <div class="admin-turno-acciones">
         <button class="btn-editar-precio">
                 Editar precio
         </button>
@@ -190,7 +191,7 @@ async function cargarTurnosHoy(){
         <button class="btn-cancelar-turno">
                 Cancelar
         </button>
-        
+        </div>
         
         `;
         listaTurnosHoy.appendChild(turnoHTML);

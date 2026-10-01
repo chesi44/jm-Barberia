@@ -1837,9 +1837,6 @@ nav {
     border-radius: 8px;
 
     font-size: 16px;
-
-    -webkit-appearance: none;
-    appearance: none;
 }
 
 #fechaReserva::-webkit-calendar-picker-indicator {

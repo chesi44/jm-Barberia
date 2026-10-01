@@ -863,14 +863,7 @@ footer{
     text-align: center;
     margin-top: 60px;
 }
-.admin-turno{
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    align-items: center;
-    gap: 20px;
-    padding: 18px 5px;
-    border-bottom: 1px solid #292929;
-}
+
 .admin-turno:last-child{
     border-bottom: none;
 }
@@ -892,10 +885,7 @@ footer{
     color: #888;
     font-size: 14px;
 }
-.admin-turno-precio{
-    color: #ddd;
-    font-weight: bold;
-}
+
 .admin-pagina {
         background:
     radial-gradient(
@@ -994,15 +984,7 @@ footer{
     font-size: 12px;
     margin: 2px 0 0;
 }
-.btn-cancelar-turno{
-        padding: 9px 14px;
-        background: transparent;
-        color: #e57373;
-        border: 1px solid #e57373;
-        border-radius: 7px;
-        cursor: pointer;
-        transition: .3s;
-}
+
 
 .btn-cancelar-turno:hover{
     background-color: #e57373;
@@ -1315,6 +1297,68 @@ footer{
     font-size: 19px;
     color: white;
 }
+.admin-turno {
+    grid-template-columns: 65px 1fr;
+    gap: 12px;
+}
+
+.admin-turno-precio {
+    text-align: left;
+    grid-column: 2;
+}
+
+.btn-editar-precio,
+.btn-cancelar-turno {
+    width: 100%;
+}
+
+.btn-editar-precio {
+    grid-column: 1 / 2;
+}
+
+.btn-cancelar-turno {
+    grid-column: 2 / 3;
+}
+.modal-precio-contenido {
+    padding: 25px 20px;
+}
+
+.modal-acciones {
+    flex-direction: column;
+}
+
+.notificacion-admin {
+    width: calc(100% - 40px);
+    text-align: center;
+}
+
+/* celu*/
+@media (max-width: 768px) {
+
+    .promociones {
+        width: 100%;       
+        padding: 0 16px;
+        box-sizing: border-box;
+        
+    }
+
+    .promociones .promociones-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .promociones .promo-card {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+}
+
+
+
 }
 
 .historial-bloque {
@@ -1563,4 +1607,212 @@ footer{
     border: 1px solid #8b7026;
     border-radius: 20px;
     padding: 4px 12px;
+}
+/* ===== ACCIONES DE TURNOS ===== */
+
+.admin-turno {
+    display: grid;
+    grid-template-columns: 75px 1fr auto auto auto;
+    align-items: center;
+    gap: 16px;
+}
+
+.admin-turno-precio {
+    min-width: 85px;
+    text-align: right;
+    font-weight: 700;
+}
+
+.btn-editar-precio,
+.btn-cancelar-turno {
+    width: auto;
+    min-width: 110px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-editar-precio {
+    background: #d4af37;
+    color: #111;
+    border: 1px solid #d4af37;
+}
+
+.btn-cancelar-turno {
+    background: transparent;
+    color: #ff6262;
+    border: 1px solid #8d3535;
+}
+/* ===== MODAL EDITAR PRECIO ===== */
+
+.modal-precio {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-precio.activo {
+    display: flex;
+}
+
+.modal-precio-contenido {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+
+    background: #111;
+    border: 1px solid #5c4a18;
+    border-radius: 16px;
+    padding: 30px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.modal-cerrar {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-etiqueta {
+    color: #d4af37;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.modal-precio-contenido h2 {
+    color: white;
+    margin: 7px 0 20px;
+}
+
+.modal-cliente {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.modal-servicio {
+    color: #888;
+    margin-bottom: 22px;
+}
+
+.modal-precio-actual {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #181818;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 20px;
+}
+
+.modal-precio-actual span {
+    color: #888;
+}
+
+.modal-precio-actual strong {
+    color: #d4af37;
+    font-size: 20px;
+}
+
+.modal-precio-contenido label {
+    display: block;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+.input-precio {
+    display: flex;
+    align-items: center;
+
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 10px;
+
+    padding: 0 15px;
+}
+
+.input-precio span {
+    color: #d4af37;
+    font-size: 20px;
+}
+
+.input-precio input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: white;
+    font-size: 20px;
+    padding: 14px 10px;
+}
+
+.modal-acciones {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.btn-modal-cancelar,
+.btn-modal-guardar {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-modal-cancelar {
+    background: transparent;
+    color: #aaa;
+    border: 1px solid #444;
+}
+
+.btn-modal-guardar {
+    background: #d4af37;
+    color: #111;
+    border: 1px solid #d4af37;
+    font-weight: 700;
+}
+
+
+/* ===== NOTIFICACIÓN ===== */
+
+.notificacion-admin {
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+
+    transform: translate(-50%, 100px);
+
+    background: #151515;
+    color: white;
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+
+    padding: 13px 20px;
+    z-index: 10000;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.notificacion-admin.mostrar {
+    transform: translate(-50%, 0);
+    opacity: 1;
 }

@@ -247,7 +247,50 @@
             </div>
         </section>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div id="modalPrecio" class="modal-precio">
+    <div class="modal-precio-contenido">
+
+        <button id="cerrarModalPrecio" class="modal-cerrar">×</button>
+
+        <span class="modal-etiqueta">PROMOCIÓN / DESCUENTO</span>
+        <h2>Editar precio</h2>
+
+        <p id="modalCliente" class="modal-cliente"></p>
+        <p id="modalServicio" class="modal-servicio"></p>
+
+        <div class="modal-precio-actual">
+            <span>Precio actual</span>
+            <strong id="modalPrecioActual">$0</strong>
+        </div>
+
+        <label for="nuevoPrecio">Nuevo precio</label>
+
+        <div class="input-precio">
+            <span>$</span>
+            <input
+                type="number"
+                id="nuevoPrecio"
+                placeholder="11000"
+                min="1"
+            >
+        </div>
+
+        <div class="modal-acciones">
+            <button id="cancelarPrecio" class="btn-modal-cancelar">
+                Cancelar
+            </button>
+
+            <button id="guardarPrecio" class="btn-modal-guardar">
+                Guardar precio
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="notificacionAdmin" class="notificacion-admin"></div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="admin.js?v=3"></script>
 </body>
 </html>

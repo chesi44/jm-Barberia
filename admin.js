@@ -24,6 +24,19 @@ const historialTurnos = document.getElementById("historialTurnos");
 const historialCancelados = document.getElementById("historialCancelados");
 const historialFacturacion = document.getElementById("historialFacturacion");
 const fechaHistorial = document.getElementById("fechaHistorial");
+const modalPrecio = document.getElementById("modalPrecio");
+const modalCliente = document.getElementById("modalCliente");
+const modalServicio = document.getElementById("modalServicio");
+const modalPrecioActual = document.getElementById("modalPrecioActual");
+const nuevoPrecio = document.getElementById("nuevoPrecio");
+
+const guardarPrecio = document.getElementById("guardarPrecio");
+const cancelarPrecio = document.getElementById("cancelarPrecio");
+const cerrarModalPrecio = document.getElementById("cerrarModalPrecio");
+
+const notificacionAdmin = document.getElementById("notificacionAdmin");
+
+let turnoEditando = null;
 const listaTurnosCancelados =
     document.getElementById("listaTurnosCancelados");
 
@@ -166,16 +179,38 @@ async function cargarTurnosHoy(){
             <strong>${turno.nombre}</strong>
             <span>${turno.servicio}</span>
         </div>
-        
-        <div class="admin-turno-precio">
-        $${Number(turno.precio).toLocaleString("es-AR")}
+            <div class="admin-turno-precio">
+                $${Number(turno.precio).toLocaleString("es-AR")}
         </div>
-        <button class="btn-cancelar-turno">
-        Cancelar
+
+        <button class="btn-editar-precio">
+                Editar precio
         </button>
+
+        <button class="btn-cancelar-turno">
+                Cancelar
+        </button>
+        
+        
         `;
         listaTurnosHoy.appendChild(turnoHTML);
         const btnCancelar = turnoHTML.querySelector(".btn-cancelar-turno");
+        const btnEditarPrecio = turnoHTML.querySelector(".btn-editar-precio");
+
+        btnEditarPrecio.addEventListener("click", () => {
+
+    turnoEditando = turno;
+
+    modalCliente.textContent = turno.nombre;
+    modalServicio.textContent = turno.servicio;
+
+    modalPrecioActual.textContent =
+        `$${Number(turno.precio).toLocaleString("es-AR")}`;
+
+    nuevoPrecio.value = turno.precio;
+
+    modalPrecio.classList.add("activo");
+});
 
         btnCancelar.addEventListener("click", async() => {
             const confirmar = confirm(
@@ -202,6 +237,59 @@ async function cargarTurnosHoy(){
         })
     });
 }
+guardarPrecio.addEventListener("click", async () => {
+
+    if (!turnoEditando) return;
+
+    const precioNumero = Number(nuevoPrecio.value);
+
+    if (precioNumero <= 0 || isNaN(precioNumero)) {
+        mostrarNotificacion("Ingresá un precio válido");
+        return;
+    }
+
+    const { error } = await supabaseCliente
+        .from("turnos")
+        .update({
+            precio: precioNumero
+        })
+        .eq("id", turnoEditando.id);
+
+    if (error) {
+        console.error("Error al editar precio:", error);
+        mostrarNotificacion("No se pudo actualizar el precio");
+        return;
+    }
+
+    modalPrecio.classList.remove("activo");
+
+    mostrarNotificacion(
+        `✓ Precio actualizado a $${precioNumero.toLocaleString("es-AR")}`
+    );
+
+    turnoEditando = null;
+
+    cargarTurnosHoy();
+    cargarResumenMes();
+    cargarHistorial("hoy");
+});
+function cerrarVentanaPrecio() {
+    modalPrecio.classList.remove("activo");
+    turnoEditando = null;
+}
+
+cancelarPrecio.addEventListener("click", cerrarVentanaPrecio);
+cerrarModalPrecio.addEventListener("click", cerrarVentanaPrecio);
+
+function mostrarNotificacion(mensaje) {
+    notificacionAdmin.textContent = mensaje;
+    notificacionAdmin.classList.add("mostrar");
+
+    setTimeout(() => {
+        notificacionAdmin.classList.remove("mostrar");
+    }, 2500);
+}
+
 async function cargarResumenMes(){
     const hoy = new Date();
     const año = hoy.getFullYear();

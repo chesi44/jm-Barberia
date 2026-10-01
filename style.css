@@ -363,74 +363,7 @@ footer{
     transform: none;
     border-color: #292929;
 }
-@media (max-width: 768px){
-    header{
-        flex-direction: column;
-        gap: 20px;
-    }
-    nav{
-        gap: 15px;
-    }
-    .hero{
-        min-height: 500px;
-        padding: 60px 6%;
-        background-attachment: scroll;
-        background-position: center center;
-    }
-    .hero h2 {
-        font-size: 42px;
-    }
-    .contenedor-servicios{
-        flex-direction: column;
-        align-items: center;
-    }
-    .card-servicio{
-        width: 100%;
-        max-width: 320px;
-    }
-    .galeria{
-        grid-template-columns: 1fr;
-    }
-    .carrusel-trabajos{
-        width: 100%;
-        position: relative;
-        display: block;
-    }
-    .contenedor-trabajos{
-        width: 100%;
-        gap: 12px;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-    }
-    .imagen-trabajo{
-        flex: 0 0 88%;
-        width: 88%;
-        height: 420px;
-        object-fit: cover;
-        scroll-snap-align: start;
-    }
-    .aviso-deslizar{
-        display: block;
-        margin-top: 15px;
-        text-align: center;
-        color: #888;
-        font-size: 14px;
-    }
-    .flecha-carrusel {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 36px;
-    height: 36px;
-}
-#anterior {
-    left: 10px;
-}
-#siguiente {
-    right: 10px;
-}
-}
+
 
 /*FOTOS FOTOS FOTOS */
 .flecha-carrusel {
@@ -690,57 +623,8 @@ footer{
     transform: rotate(-20deg);
 }
 
-@media (max-width: 768px) {
-    .trabajos{
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .selector-servicios{
-        flex-direction: column;
-    }
-    #horariosReserva{
-        grid-template-columns: repeat(2,1fr);
-    }
-    .panel-reserva{
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        margin: 0;
-    }
-    .decoracion,
-    .mini-deco {
-        display: none;
-    }
 
-    .turnos-pagina {
-        padding: 35px 20px;
-    }
 
-    #elegirServicio h1 {
-        font-size: 30px;
-    }
-
-    #elegirServicio > p {
-        margin-top: 10px;
-        margin-bottom: 28px;
-    }
-
-    .selector-servicios {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .opcion-servicio {
-        width: 100%;
-        padding: 18px;
-    }
-
-    .panel-reserva {
-        margin-top: 25px;
-        padding: 25px 18px;
-    }
-}
 .turnos-pagina{
     background:
         radial-gradient(
@@ -1082,284 +966,7 @@ footer{
 .historial-celular{
     display: none;
 }
-@media (max-width: 768px){
 
-    .admin-panel,
-    .admin-contenido,
-    .admin-bloque{
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-    .admin-card{
-        width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-    .admin-encabezado{
-        align-items: flex-start;
-        gap: 20px;
-        flex-direction: column;
-    }
-    .admin-turno-hora{
-        grid-row: 1/3;
-    }
-    .admin-encabezado h1{
-        font-size: 30px;
-    }
-    .admin-estadisticas{
-        grid-template-columns: 1fr;
-        width: 100%;
-    }
-    .btn-cerrar-sesion{
-        width: 100%;
-    }
-    .btn-cancelar-turno{
-        grid-column: 3;
-        grid-row: 2;
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-    .admin-turno{
-        grid-template-columns: 60px 1fr auto;
-        gap: 8px 10px;
-        align-items: center;
-    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-    .admin-turno-precio{
-        font-size: 14px;
-        grid-column: 3;
-        grid-row: 1;
-    }
-
-    #graficoFinanzas{
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    align-items: stretch;
-    padding: 20px 0;
-    }
-    .contenedor-grafico{
-        width: 240px;
-        height: 240px;
-    }
-    .resumen-servicios{
-        max-width: none;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .resumen-servicio{
-        width: 100%;
-        max-width: none;
-        box-sizing: border-box;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 14px 16px;
-        background: #1d1d1d;
-        border: 1px solid #292929;
-        border-radius: 8px;
-    }
-    .historial-resumen{
-        grid-template-columns: repeat(2,1fr);
-    }
-    .historial-stat{
-        padding: 14px 12px;
-    }
-    .historial-stat span{
-        font-size: 12px;
-    }
-    .historial-stat:last-child{
-        grid-column: 1 / -1;
-        text-align: center;
-    }
-    .historial-tabla-contenedor{
-        display: none;
-    }
-    .historial-tabla {
-    min-width: 0;
-    width: 100%;
-}
-
-.historial-tabla thead {
-    display: none;
-}
-
-.historial-tabla,
-.historial-tabla tbody,
-.historial-tabla tr,
-.historial-tabla td {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.historial-tabla tr {
-    position: relative;
-    background: #111;
-    border: 1px solid #292929;
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 6px 15px;
-}
-
-.historial-tabla td {
-    padding: 0;
-    border: none;
-}
-
-/* Fecha */
-.historial-tabla td:nth-child(1) {
-    color: #888;
-    font-size: 12px;
-}
-
-/* Hora */
-.historial-tabla td:nth-child(2) {
-    color: #d4af37;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-/* Cliente */
-.historial-tabla td:nth-child(3) {
-    font-weight: 600;
-}
-
-/* Servicio */
-.historial-tabla td:nth-child(4) {
-    color: #aaa;
-    font-size: 13px;
-}
-
-/* Precio */
-.historial-tabla td:nth-child(5) {
-    grid-column: 2;
-    grid-row: 2;
-    font-weight: 700;
-    text-align: right;
-}
-
-/* Estado */
-.historial-tabla td:nth-child(6) {
-    grid-column: 2;
-    grid-row: 3;
-    text-align: right;
-}
-.historial-celular{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-}
-.historial-card {
-    background: #111;
-    border: 1px solid #292929;
-    border-radius: 12px;
-    padding: 16px;
-}
-
-.historial-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
-.historial-card-top > strong {
-    color: #d4af37;
-    font-size: 20px;
-}
-
-.historial-card h3 {
-    margin: 14px 0 8px;
-    font-size: 18px;
-    color: white;
-}
-
-.historial-card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    color: #999;
-    font-size: 14px;
-}
-
-.historial-card-precio {
-    display: block;
-    margin-top: 14px;
-    font-size: 19px;
-    color: white;
-}
-.admin-turno {
-    grid-template-columns: 65px 1fr;
-    gap: 12px;
-}
-
-.admin-turno-precio {
-    text-align: left;
-    grid-column: 2;
-}
-
-.btn-editar-precio,
-.btn-cancelar-turno {
-    width: 100%;
-}
-
-.btn-editar-precio {
-    grid-column: 1 / 2;
-}
-
-.btn-cancelar-turno {
-    grid-column: 2 / 3;
-}
-.modal-precio-contenido {
-    padding: 25px 20px;
-}
-
-.modal-acciones {
-    flex-direction: column;
-}
-
-.notificacion-admin {
-    width: calc(100% - 40px);
-    text-align: center;
-}
-
-/* celu*/
-@media (max-width: 768px) {
-
-    .promociones {
-        width: 100%;       
-        padding: 0 16px;
-        box-sizing: border-box;
-        
-    }
-
-    .promociones .promociones-grid {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-    }
-
-    .promociones .promo-card {
-        width: 100%;
-        max-width: none;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-}
-
-
-
-}
 
 .historial-bloque {
     margin-top: 30px;
@@ -1518,7 +1125,7 @@ footer{
     margin: 0;
     color: #888;
 }
-/* ===== PROMOCIONES ===== */
+/* PROMOCIONES  */
 
 .promociones {
     width: min(1100px, 90%);
@@ -1608,7 +1215,7 @@ footer{
     border-radius: 20px;
     padding: 4px 12px;
 }
-/* ===== ACCIONES DE TURNOS ===== */
+/* ACCIONES DE TURNOS */
 
 .admin-turno {
     display: grid;
@@ -1643,7 +1250,7 @@ footer{
     color: #ff6262;
     border: 1px solid #8d3535;
 }
-/* ===== MODAL EDITAR PRECIO ===== */
+/* MODAL EDITAR PRECIO  */
 
 .modal-precio {
     display: none;
@@ -1790,7 +1397,8 @@ footer{
 }
 
 
-/* ===== NOTIFICACIÓN ===== */
+
+/*  NOTIFICACIÓN  */
 
 .notificacion-admin {
     position: fixed;
@@ -1815,4 +1423,379 @@ footer{
 .notificacion-admin.mostrar {
     transform: translate(-50%, 0);
     opacity: 1;
+}
+
+
+/* INICIO */
+@media (max-width: 768px){
+header {
+    flex-direction: column;
+    gap: 20px;
+}
+
+nav {
+    gap: 15px;
+}
+
+.hero {
+    min-height: 500px;
+    padding: 60px 6%;
+    background-attachment: scroll;
+    background-position: center center;
+}
+
+.hero h2 {
+    font-size: 42px;
+}
+
+.contenedor-servicios {
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-servicio {
+    width: 100%;
+    max-width: 320px;
+}
+
+.galeria {
+    grid-template-columns: 1fr;
+}
+
+.carrusel-trabajos {
+    width: 100%;
+    position: relative;
+    display: block;
+}
+
+.contenedor-trabajos {
+    width: 100%;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.imagen-trabajo {
+    flex: 0 0 88%;
+    width: 88%;
+    height: 420px;
+    object-fit: cover;
+    scroll-snap-align: start;
+}
+
+.aviso-deslizar {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+}
+
+.flecha-carrusel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+}
+
+#anterior {
+    left: 10px;
+}
+
+#siguiente {
+    right: 10px;
+}   
+    /*termina inicio*/
+
+    /*turnos*/
+    .trabajos {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .turnos-pagina {
+        padding: 35px 20px;
+    }
+
+    #elegirServicio h1 {
+        font-size: 30px;
+    }
+
+    #elegirServicio > p {
+        margin-top: 10px;
+        margin-bottom: 28px;
+    }
+
+    .selector-servicios {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .opcion-servicio {
+        width: 100%;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    #horariosReserva {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .panel-reserva {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        margin: 25px 0 0;
+        padding: 0;
+    }
+
+    .decoracion,
+    .mini-deco {
+        display: none;
+    }
+
+    /* promos*/
+
+    .promociones {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 16px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .promociones .promociones-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .promociones .promo-card {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+
+    /*admin*/
+
+    .admin-panel,
+    .admin-contenido,
+    .admin-bloque {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .admin-card {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .admin-encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .admin-encabezado h1 {
+        font-size: 30px;
+    }
+
+    .admin-estadisticas {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .btn-cerrar-sesion {
+        width: 100%;
+    }
+
+
+    /*turno admin*/
+
+    .admin-turno {
+        display: grid;
+        grid-template-columns: 65px minmax(0, 1fr);
+        gap: 10px 12px;
+        align-items: center;
+    }
+
+    .admin-turno-hora {
+        grid-column: 1;
+        grid-row: 1 / 3;
+    }
+
+    .admin-turno-info {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+    }
+
+    .admin-turno-precio {
+        grid-column: 2;
+        grid-row: 2;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .btn-editar-precio {
+        grid-column: 1;
+        grid-row: 3;
+        width: 100%;
+        min-width: 0;
+        padding: 10px 6px;
+        font-size: 12px;
+    }
+
+    .btn-cancelar-turno {
+        grid-column: 2;
+        grid-row: 3;
+        width: 100%;
+        min-width: 0;
+        padding: 10px 6px;
+        font-size: 12px;
+    }
+
+
+    /* finanzas*/
+
+    #graficoFinanzas {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        align-items: stretch;
+        padding: 20px 0;
+    }
+
+    .contenedor-grafico {
+        width: 240px;
+        height: 240px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .resumen-servicios {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: none;
+    }
+
+    .resumen-servicio {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 14px 16px;
+        background: #1d1d1d;
+        border: 1px solid #292929;
+        border-radius: 8px;
+    }
+
+
+    /* historial - resumen*/
+
+    .historial-resumen {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .historial-stat {
+        padding: 14px 12px;
+    }
+
+    .historial-stat span {
+        font-size: 12px;
+    }
+
+    .historial-stat:last-child {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+
+
+    /* La tabla de PC desaparece en celular */
+
+    .historial-tabla-contenedor {
+        display: none;
+    }
+
+
+    /* Cards exclusivas de celular */
+
+    .historial-celular {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .historial-card {
+        background: #111;
+        border: 1px solid #292929;
+        border-radius: 12px;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    .historial-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .historial-card-top > strong {
+        color: #d4af37;
+        font-size: 20px;
+    }
+
+    .historial-card h3 {
+        margin: 14px 0 8px;
+        font-size: 18px;
+        color: white;
+    }
+
+    .historial-card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        color: #999;
+        font-size: 14px;
+    }
+
+    .historial-card-precio {
+        display: block;
+        margin-top: 14px;
+        font-size: 19px;
+        color: white;
+    }
+
+
+    /* modal editar precio*/
+
+    .modal-precio-contenido {
+        padding: 25px 20px;
+    }
+
+    .modal-acciones {
+        flex-direction: column;
+    }
+
+    .notificacion-admin {
+        width: calc(100% - 40px);
+        text-align: center;
+        box-sizing: border-box;
+    }
 }

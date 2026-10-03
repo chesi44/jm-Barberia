@@ -8,8 +8,68 @@ let duracionReserva = 0;
 let horariosSeleccionado = "";
 let servicioReserva = "";
 let precioReserva = 0;
+let promocionReserva = null;
+let cantidadTurnosReserva = 1;
 
 const opcionesServicio = document.querySelectorAll(".opcion-servicio");
+const promocionesReservables =
+    document.querySelectorAll(".promo-reservable");
+
+promocionesReservables.forEach((promo) => {
+
+    promo.addEventListener("click", () => {
+
+        const tipoPromo = promo.dataset.promo;
+
+        promocionReserva = tipoPromo;
+
+        // Todas las promos son sobre corte de pelo
+        servicioReserva = "Corte de pelo";
+        duracionReserva = 40;
+        cantidadTurnosReserva = 1;
+
+        if (tipoPromo === "lunes") {
+
+            precioReserva = 11000;
+
+        } else if (tipoPromo === "amigos") {
+
+            precioReserva = 12000;
+
+            // Tres cortes consecutivos
+            cantidadTurnosReserva = 3;
+
+        } else if (tipoPromo === "futsal") {
+
+            precioReserva = 13000;
+        }
+
+        document
+            .querySelectorAll(".promo-reservable")
+            .forEach((card) => {
+                card.classList.remove("seleccionada");
+            });
+
+        promo.classList.add("seleccionada");
+
+
+        // Igual que cuando elegimos un servicio normal
+        document
+            .getElementById("pasoFecha")
+            .style.display = "block";
+
+
+        // Bajamos automáticamente hasta la fecha
+        document
+            .getElementById("pasoFecha")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+    });
+
+});
 const pasoFecha = document.getElementById("pasoFecha");
 const elegirServicio = document.getElementById("elegirServicio");
 const fechaReserva = document.getElementById("fechaReserva");
@@ -25,28 +85,57 @@ const nombreCliente = document.getElementById("nombreCliente");
 const telefonoCliente = document.getElementById("telefonoCliente");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const resumenTurno = document.getElementById("resumenTurno");
-
+const duracionTotalReserva = 
+    duracionReserva * cantidadTurnosReserva;
 fechaReserva.addEventListener("change", async () => {
 
     const fechaElegida = new Date(fechaReserva.value + "T00:00:00");
+
+    // ===== PROMO LUNES =====
+    if (promocionReserva === "lunes") {
+
+        const diaSemana = fechaElegida.getDay();
+
+        // Domingo = 0
+        // Lunes = 1
+        if (diaSemana !== 1) {
+
+            alert(
+                "La promoción Lunes 20% OFF solamente está disponible los lunes."
+            );
+
+            fechaReserva.value = "";
+            pasoHorarios.classList.remove("visible");
+
+            return;
+        }
+    }
+
+    // ===== NO PERMITIR FECHAS PASADAS =====
     const hoyComparacion = new Date();
     hoyComparacion.setHours(0,0,0,0);
+
     if (fechaElegida < hoyComparacion){
         alert("No podés reservar una fecha pasada");
         fechaReserva.value = "";
         return;
     }
+
+    // ===== DOMINGOS CERRADO =====
     if(fechaElegida.getDay() === 0){
         alert("Los domingos la barbería está cerrada");
         fechaReserva.value = "";
         return;
     }
+
+    // ===== MOSTRAR HORARIOS =====
     pasoHorarios.classList.add("visible");
 
     const ocupados = await obtenerHorariosOcupados(fechaReserva.value);
+
     console.log("Turnos ocupados recibidos:", ocupados);
 
-    generarHorariosReserva(duracionReserva, ocupados)
+    generarHorariosReserva(duracionReserva, ocupados);
 
 });
 function horaAMinutos(hora){
@@ -91,6 +180,10 @@ async function obtenerHorariosOcupados(fecha){
 function generarHorariosReserva(duracion, ocupados){
 
     horariosReserva.innerHTML = "";
+    const duracionBloque =
+    promocionReserva === "amigos"
+    ?120
+    :duracion;
 
     const ahora = new Date();
     const fechaElegida = new Date(fechaReserva.value + "T00:00:00");
@@ -104,7 +197,7 @@ function generarHorariosReserva(duracion, ocupados){
     let horaActual = 9 * 60;
     let horaCierre = 20 * 60;
 
-    while (horaActual + duracion <= horaCierre){
+    while (horaActual + duracionBloque <= horaCierre){
         const horas = Math.floor(horaActual / 60);
         const minutos = horaActual % 60;
         const horaTexto =
@@ -118,7 +211,7 @@ function generarHorariosReserva(duracion, ocupados){
             const finOcupado = inicioOcupado + Number(turno.duracion);
 
             const inicioNuevo = horaActual;
-            const finNuevo = horaActual + duracion;
+            const finNuevo = horaActual + duracionBloque;
 
             return inicioNuevo < finOcupado && finNuevo > inicioOcupado;
 
@@ -174,7 +267,8 @@ btnConfirmar.addEventListener("click", async () => {
         p_precio: precioReserva,
         p_fecha: fecha,
         p_horario: horariosSeleccionado,
-        p_duracion: duracionReserva
+        p_duracion: duracionReserva,
+        p_promocion: promocionReserva
         }
     );
     if (error){

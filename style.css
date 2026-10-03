@@ -1126,7 +1126,18 @@ footer{
     color: #888;
 }
 /* PROMOCIONES  */
+.promo-reservable {
+    cursor: pointer;
+}
 
+.promo-reservable:active {
+    transform: scale(0.98);
+}
+
+.promo-reservable.seleccionada {
+    border-color: #d4af37;
+    box-shadow: 0 0 0 1px #d4af37;
+}
 .promociones {
     width: min(1100px, 90%);
     margin: 45px auto 30px;

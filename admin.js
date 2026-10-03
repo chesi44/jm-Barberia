@@ -124,6 +124,26 @@ btnLogin.addEventListener("click", async () => {
     });
 };
 
+function mostrarPromocion(turno) {
+
+    if (!turno.promocion) {
+        return turno.servicio;
+    }
+
+    if (turno.promocion === "lunes") {
+        return `${turno.servicio} · LUNES 20% OFF`;
+    }
+
+    if (turno.promocion === "amigos") {
+        return `${turno.servicio} · 3 AMIGOS`;
+    }
+
+    if (turno.promocion === "futsal") {
+        return `${turno.servicio} · FUTSAL`;
+    }
+
+    return turno.servicio;
+}
 async function cargarTurnosHoy(){
 
     const hoy = new Date();
@@ -177,7 +197,7 @@ async function cargarTurnosHoy(){
         </div>
         <div class="admin-turno-info">
             <strong>${turno.nombre}</strong>
-            <span>${turno.servicio}</span>
+            <span>${mostrarPromocion(turno)}</span>
         </div>
             <div class="admin-turno-precio">
                 $${Number(turno.precio).toLocaleString("es-AR")}

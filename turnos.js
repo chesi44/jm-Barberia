@@ -82,9 +82,10 @@ const pasoHorarios = document.getElementById("pasoHorarios");
 const horariosReserva = document.getElementById("horariosReserva");
 const pasoDatos = document.getElementById("pasoDatos");
 const nombreCliente = document.getElementById("nombreCliente");
-const telefonoCliente = document.getElementById("telefonoCliente");
+const emailCliente = document.getElementById("emailCliente");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const resumenTurno = document.getElementById("resumenTurno");
+const nombreAmigos = document.getElementById("nombresAmigos");
 const duracionTotalReserva = 
     duracionReserva * cantidadTurnosReserva;
 fechaReserva.addEventListener("change", async () => {
@@ -249,10 +250,10 @@ function generarHorariosReserva(duracion, ocupados){
 btnConfirmar.addEventListener("click", async () => {
 
     const nombre = nombreCliente.value;
-    const telefono = telefonoCliente.value;
+    const email = emailCliente.value;
     const fecha = fechaReserva.value;
 
-    if(nombre == "" || telefono == "" || horariosSeleccionado == ""){
+    if(nombre == "" || email == "" || horariosSeleccionado == ""){
 
         alert("Completá todos los datos del turno");
 
@@ -262,7 +263,7 @@ btnConfirmar.addEventListener("click", async () => {
         "crear_turno",
         {
         p_nombre: nombre,
-        p_telefono: telefono,
+        p_telefono: email,
         p_servicio: servicioReserva,
         p_precio: precioReserva,
         p_fecha: fecha,
@@ -273,6 +274,11 @@ btnConfirmar.addEventListener("click", async () => {
     );
     if (error){
         console.error("Error al guardar el turno:", error);
+        console.log("MENSAJE:", error.message);
+        console.log("CODIGO:", error.code);
+        console.log("DETALLES:", error.details);
+        console.log("HINT:", error.hint);
+
         alert("Hubo un error al reservar el turno");
         return;
     }
@@ -287,7 +293,7 @@ btnConfirmar.addEventListener("click", async () => {
     <p>Fecha: ${fecha}</p>
     <p>Horario: ${horariosSeleccionado}</p>
     <p>Nombre: ${nombre}</p>
-    <p>Telefono: ${telefono}</p>
+    <p>Email: ${email}</p>
     <strong>
     Total: $ ${precioReserva.toLocaleString("es-AR")}
     </strong>

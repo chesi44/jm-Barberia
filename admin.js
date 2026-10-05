@@ -501,7 +501,7 @@ async function cargarHistorial(filtro = "hoy") {
             <td>${turno.fecha}</td>
             <td>${turno.horario.slice(0, 5)}</td>
             <td>${turno.nombre}</td>
-            <td>${turno.servicio}</td>
+            <td>${mostrarPromocion(turno)}</td>
             <td>$${Number(turno.precio).toLocaleString("es-AR")}</td>
             <td>
             <span class="estado-turno ${turno.estado.toLowerCase()}">
@@ -527,7 +527,7 @@ tarjeta.innerHTML = `
 
     <div class="historial-card-info">
         <span>${turno.fecha}</span>
-        <span>${turno.servicio}</span>
+        <span>${mostrarPromocion(turno)}</span>
     </div>
 
     <strong class="historial-card-precio">

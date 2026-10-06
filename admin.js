@@ -229,7 +229,7 @@ async function cargarTurnosHoy(){
             }
             const mensaje = `¡Hola! ${turno.nombre}
             Fecha: ${turno.fecha}
-            Horario: ${turno.horario.slice(0.5)}
+            Horario: ${turno.horario.slice(0,5)}
             Servicio: ${turno.servicio}
             Precio: ${Number(turno.precio).toLocaleString("es-AR")}
             ¡Te esperamos! ✂️`;

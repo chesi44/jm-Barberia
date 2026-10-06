@@ -156,7 +156,7 @@ opcionesServicio.forEach((boton) => {
         duracionReserva = Number(duracion);
 
         elegirServicio.style.display = "none"
-
+        document.querySelector(".promociones").style.display = "none";
         pasoFecha.classList.add("visible");
 
         console.log(servicio);

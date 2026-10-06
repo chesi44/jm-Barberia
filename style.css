@@ -1458,15 +1458,35 @@ footer{
 .btn-whatsapp:active {
     transform: scale(0.97);
 }
+.fecha-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    margin: 15px auto;
+}
+
+.fecha-placeholder {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+
+
 /* =========================
-   RESPONSIVE CELULAR
+    RESPONSIVE CELULAR
 ========================= */
 
 @media (max-width: 768px) {
 
-    /* =====================
-       INICIO
-    ===================== */
+
+
 
     header {
         flex-direction: column;
@@ -1549,9 +1569,6 @@ footer{
     }
 
 
-    /* =====================
-       TURNOS
-    ===================== */
 
     .trabajos {
         padding-left: 10px;
@@ -1600,10 +1617,6 @@ footer{
     }
 
 
-    /* =====================
-       PROMOCIONES
-    ===================== */
-
     .promociones {
         width: 100%;
         margin: 40px auto 30px;
@@ -1628,9 +1641,7 @@ footer{
     }
 
 
-    /* =====================
-       ADMIN GENERAL
-    ===================== */
+
 
     .admin-panel,
     .admin-contenido,
@@ -1780,9 +1791,7 @@ footer{
     }
 
 
-    /* =====================
-       FINANZAS
-    ===================== */
+
 
     #graficoFinanzas {
         display: grid;
@@ -1824,9 +1833,6 @@ footer{
     }
 
 
-    /* =====================
-       HISTORIAL
-    ===================== */
 
     .historial-resumen {
         grid-template-columns: repeat(2, 1fr);
@@ -1902,9 +1908,7 @@ footer{
     }
 
 
-    /* =====================
-       MODAL EDITAR PRECIO
-    ===================== */
+
 
     .modal-precio-contenido {
         padding: 25px 20px;
@@ -1921,9 +1925,7 @@ footer{
     }
 
 
-    /* =====================
-       INPUT FECHA
-    ===================== */
+
 
     #fechaReserva {
         display: block;

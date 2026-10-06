@@ -88,8 +88,15 @@ const resumenTurno = document.getElementById("resumenTurno");
 const nombreAmigos = document.getElementById("nombresAmigos");
 const duracionTotalReserva = 
     duracionReserva * cantidadTurnosReserva;
-fechaReserva.addEventListener("change", async () => {
-    document.querySelector(".fecha-placeholder").style.display = "none";
+    fechaReserva.addEventListener("change", async () => {
+
+    fechaReserva.classList.add("fecha-elegida");
+
+    const placeholderFecha = document.querySelector(".fecha-placeholder");
+
+    if (placeholderFecha) {
+        placeholderFecha.style.display = "none";
+    }
     const fechaElegida = new Date(fechaReserva.value + "T00:00:00");
 
     // ===== PROMO LUNES =====

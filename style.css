@@ -1458,6 +1458,7 @@ footer{
 .btn-whatsapp:active {
     transform: scale(0.97);
 }
+
 .fecha-wrapper {
     position: relative;
     width: 100%;
@@ -1465,21 +1466,26 @@ footer{
     margin: 15px auto;
 }
 
-.fecha-placeholder {
-    display: none;
+    .fecha-placeholder {
     position: absolute;
-    left: 15px;
+    left: 0;
+    right: 40px;
     top: 50%;
-    transform: translateY(-50%);
+    text-align: center;
     color: #aaa;
     font-size: 14px;
     pointer-events: none;
     z-index: 1;
+    white-space: nowrap;
 }
 
+#fechaReserva {
+    color: transparent;
+}
 
-
-
+#fechaReserva.fecha-elegida {
+    color: white;
+}
 /* =========================
     RESPONSIVE CELULAR
 ========================= */
@@ -1925,49 +1931,14 @@ footer{
         box-sizing: border-box;
     }
 
-
-    .fecha-placeholder {
-    display: block;
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #aaa;
-    font-size: 14px;
-    pointer-events: none;
-    z-index: 1;
+        #fechaReserva {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
-    #fechaReserva {
-        display: block;
-        width: 100%;
-        max-width: 260px;
-        min-height: 52px;
-
-        margin: 15px auto;
-        padding: 12px 15px;
-
-        box-sizing: border-box;
-
-        background: #1d1d1d;
-        color: white;
-
-        border: 1px solid #333;
-        border-radius: 8px;
-
-        font-size: 16px;
-        color-scheme: dark;
-    }
-
-    #fechaReserva::-webkit-date-and-time-value {
-        text-align: left;
-        color: white;
-    }
-
-    #fechaReserva::-webkit-calendar-picker-indicator {
-        opacity: 1;
-        cursor: pointer;
-        filter: invert(1);
-    }
+#fechaReserva.fecha-elegida {
+    color: white;
+    -webkit-text-fill-color: white;
+}
 
 }

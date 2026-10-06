@@ -1458,6 +1458,27 @@ footer{
 .btn-whatsapp:active {
     transform: scale(0.97);
 }
+.fecha-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    margin: 15px auto;
+}
+
+.fecha-placeholder {
+    display: none;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+
 
 /* =========================
     RESPONSIVE CELULAR
@@ -1905,7 +1926,17 @@ footer{
     }
 
 
-
+    .fecha-placeholder {
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 1;
+}
 
     #fechaReserva {
         display: block;

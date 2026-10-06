@@ -207,7 +207,9 @@ async function cargarTurnosHoy(){
         <button class="btn-editar-precio">
                 Editar precio
         </button>
-
+        <button class="btn-whatsapp">
+            ✓ WhatsApp
+        </button>    
         <button class="btn-cancelar-turno">
                 Cancelar
         </button>
@@ -217,6 +219,25 @@ async function cargarTurnosHoy(){
         listaTurnosHoy.appendChild(turnoHTML);
         const btnCancelar = turnoHTML.querySelector(".btn-cancelar-turno");
         const btnEditarPrecio = turnoHTML.querySelector(".btn-editar-precio");
+        const btnWhatsApp = turnoHTML.querySelector(".btn-whatsapp");
+        btnWhatsApp.addEventListener("click", () => {
+
+            let telefono = turno.telefono.replace(/\D/g, "");
+
+            if (!telefono.startsWith("54")){
+                telefono = "54" + telefono;
+            }
+            const mensaje = `¡Hola! ${turno.nombre}
+            Fecha: ${turno.fecha}
+            Horario: ${turno.horario.slice(0.5)}
+            Servicio: ${turno.servicio}
+            Precio: ${Number(turno.precio).toLocaleString("es-AR")}
+            ¡Te esperamos! ✂️`;
+
+            const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, "_blank");
+        })
+
 
         btnEditarPrecio.addEventListener("click", () => {
 

@@ -750,6 +750,7 @@ footer{
 
 .admin-turno:last-child{
     border-bottom: none;
+    border-bottom: none;
 }
 .admin-turno-hora{
     color: #d4af37;
@@ -1438,91 +1439,120 @@ footer{
     opacity: 1;
 }
 
-
-/* INICIO */
-@media (max-width: 768px){
-header {
-    flex-direction: column;
-    gap: 20px;
+.btn-whatsapp {
+    background: #09f760;
+    color: rgb(52, 50, 50);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-nav {
-    gap: 15px;
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
 }
 
-.hero {
-    min-height: 500px;
-    padding: 60px 6%;
-    background-attachment: scroll;
-    background-position: center center;
+.btn-whatsapp:active {
+    transform: scale(0.97);
 }
+/* =========================
+   RESPONSIVE CELULAR
+========================= */
 
-.hero h2 {
-    font-size: 42px;
-}
+@media (max-width: 768px) {
 
-.contenedor-servicios {
-    flex-direction: column;
-    align-items: center;
-}
+    /* =====================
+       INICIO
+    ===================== */
 
-.card-servicio {
-    width: 100%;
-    max-width: 320px;
-}
+    header {
+        flex-direction: column;
+        gap: 20px;
+    }
 
-.galeria {
-    grid-template-columns: 1fr;
-}
+    nav {
+        gap: 15px;
+    }
 
-.carrusel-trabajos {
-    width: 100%;
-    position: relative;
-    display: block;
-}
+    .hero {
+        min-height: 500px;
+        padding: 60px 6%;
+        background-attachment: scroll;
+        background-position: center center;
+    }
 
-.contenedor-trabajos {
-    width: 100%;
-    gap: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-}
+    .hero h2 {
+        font-size: 42px;
+    }
 
-.imagen-trabajo {
-    flex: 0 0 88%;
-    width: 88%;
-    height: 420px;
-    object-fit: cover;
-    scroll-snap-align: start;
-}
+    .contenedor-servicios {
+        flex-direction: column;
+        align-items: center;
+    }
 
-.aviso-deslizar {
-    display: block;
-    margin-top: 15px;
-    text-align: center;
-    color: #888;
-    font-size: 14px;
-}
+    .card-servicio {
+        width: 100%;
+        max-width: 320px;
+    }
 
-.flecha-carrusel {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 36px;
-    height: 36px;
-}
+    .galeria {
+        grid-template-columns: 1fr;
+    }
 
-#anterior {
-    left: 10px;
-}
+    .carrusel-trabajos {
+        width: 100%;
+        position: relative;
+        display: block;
+    }
 
-#siguiente {
-    right: 10px;
-}   
-    /*termina inicio*/
+    .contenedor-trabajos {
+        width: 100%;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
 
-    /*turnos*/
+    .imagen-trabajo {
+        flex: 0 0 88%;
+        width: 88%;
+        height: 420px;
+        object-fit: cover;
+        scroll-snap-align: start;
+    }
+
+    .aviso-deslizar {
+        display: block;
+        margin-top: 15px;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+    }
+
+    .flecha-carrusel {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 36px;
+        height: 36px;
+    }
+
+    #anterior {
+        left: 10px;
+    }
+
+    #siguiente {
+        right: 10px;
+    }
+
+
+    /* =====================
+       TURNOS
+    ===================== */
+
     .trabajos {
         padding-left: 10px;
         padding-right: 10px;
@@ -1569,7 +1599,10 @@ nav {
         display: none;
     }
 
-    /* promos*/
+
+    /* =====================
+       PROMOCIONES
+    ===================== */
 
     .promociones {
         width: 100%;
@@ -1595,7 +1628,9 @@ nav {
     }
 
 
-    /*admin*/
+    /* =====================
+       ADMIN GENERAL
+    ===================== */
 
     .admin-panel,
     .admin-contenido,
@@ -1631,71 +1666,123 @@ nav {
     }
 
 
-    /*turno admin*/
+    /* =====================
+    TURNOS ADMIN
+    ===================== */
 
     .admin-turno {
         display: grid;
-        grid-template-columns:60px 1fr;
-        gap: 6px 12px;
-        align-items: center;
-        padding: 16px 10px;
+        grid-template-columns: 55px minmax(0, 1fr);
+        gap: 5px 10px;
+        align-items: start;
+        padding: 12px 8px;
+        border-bottom: 1px solid #333;
     }
+
+    /* HORA */
 
     .admin-turno-hora {
         grid-column: 1;
         grid-row: 1 / 4;
+
+        color: #d4af37;
+        font-size: 16px;
+        font-weight: bold;
+
+        padding-top: 2px;
     }
+
+    /* NOMBRE + SERVICIO */
 
     .admin-turno-info {
         grid-column: 2;
         grid-row: 1;
+        min-width: 0;
     }
-    .admin-turno-info strong{
+
+    .admin-turno-info strong {
         display: block;
+        font-size: 15px;
         word-break: break-word;
     }
+
+    .admin-turno-info span {
+        font-size: 13px;
+    }
+
+    /* PRECIO */
+
     .admin-turno-precio {
         grid-column: 2;
         grid-row: 2;
+
         text-align: left;
+        font-size: 15px;
+        margin: 0;
     }
+
+    /* LOS 3 BOTONES EN UNA SOLA FILA */
+
     .admin-turno-acciones {
-    grid-column: 2;
-    grid-row: 3;
+        grid-column: 2;
+        grid-row: 3;
 
-    display: flex;
-    justify-content: flex-start;
-    gap: 8px;
-    margin-top: 5px;
-}
+        display: flex;
+        align-items: center;
+        gap: 5px;
 
-.admin-turno-acciones .btn-editar-precio,
-.admin-turno-acciones .btn-cancelar-turno {
-    width: auto;
-    min-width: 0;
-    height: 30px;
-    padding: 0 12px;
-    margin: 0;
+        width: 100%;
+        margin-top: 5px;
+    }
 
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-}
+    .admin-turno-acciones .btn-editar-precio,
+    .admin-turno-acciones .btn-whatsapp,
+    .admin-turno-acciones .btn-cancelar-turno {
+        width: auto;
+        min-width: 0;
 
-/* Editar */
-.admin-turno-acciones .btn-editar-precio {
-    background: #d4af37;
-    color: #111;
-    border: 1px solid #d4af37;
-}
+        height: 30px;
+        padding: 0 6px;
+        margin: 0;
 
-/* Cancelar */
-.admin-turno-acciones .btn-cancelar-turno {
-    background: transparent;
-    color: #ff6262;
-    border: 1px solid #8f3636;
-}
-    /* finanzas*/
+        font-size: 10px;
+        font-weight: 600;
+        white-space: nowrap;
+
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+
+    /* EDITAR */
+
+    .admin-turno-acciones .btn-editar-precio {
+        background: #d4af37;
+        color: #111;
+        border: 1px solid #d4af37;
+    }
+
+    /* WHATSAPP */
+
+    .admin-turno-acciones .btn-whatsapp {
+        flex: 1;
+
+        background: #09f760;
+        color: #222;
+        border: none;
+    }
+
+    /* CANCELAR */
+
+    .admin-turno-acciones .btn-cancelar-turno {
+        background: transparent;
+        color: #ff6262;
+        border: 1px solid #8f3636;
+    }
+
+
+    /* =====================
+       FINANZAS
+    ===================== */
 
     #graficoFinanzas {
         display: grid;
@@ -1737,7 +1824,9 @@ nav {
     }
 
 
-    /* historial - resumen*/
+    /* =====================
+       HISTORIAL
+    ===================== */
 
     .historial-resumen {
         grid-template-columns: repeat(2, 1fr);
@@ -1756,15 +1845,13 @@ nav {
         text-align: center;
     }
 
-
-    /* La tabla de PC desaparece en celular */
+    /* Tabla PC desaparece */
 
     .historial-tabla-contenedor {
         display: none;
     }
 
-
-    /* Cards exclusivas de celular */
+    /* Cards celular */
 
     .historial-celular {
         display: flex;
@@ -1815,7 +1902,9 @@ nav {
     }
 
 
-    /* modal editar precio*/
+    /* =====================
+       MODAL EDITAR PRECIO
+    ===================== */
 
     .modal-precio-contenido {
         padding: 25px 20px;
@@ -1830,39 +1919,42 @@ nav {
         text-align: center;
         box-sizing: border-box;
     }
+
+
+    /* =====================
+       INPUT FECHA
+    ===================== */
+
     #fechaReserva {
-    display: block;
-    width: 100%;
-    max-width: 260px;
-    min-height: 52px;
+        display: block;
+        width: 100%;
+        max-width: 260px;
+        min-height: 52px;
 
-    margin: 15px auto;
-    padding: 12px 15px;
+        margin: 15px auto;
+        padding: 12px 15px;
 
-    box-sizing: border-box;
+        box-sizing: border-box;
 
-    background: #1d1d1d;
-    color: white;
+        background: #1d1d1d;
+        color: white;
 
-    border: 1px solid #333;
-    border-radius: 8px;
+        border: 1px solid #333;
+        border-radius: 8px;
 
-    font-size: 16px;
-    color-scheme: dark;
-}
-#fechaResereva::-webkit-date-and-time-value{
-    text-align: left;
-    color: white;
-}
-#fechaReserva::-webkit-calendar-picker-indicator{
-    opacity: 1;
-    cursor: pointer;
-    filter: invert(1);
-}
+        font-size: 16px;
+        color-scheme: dark;
+    }
 
-#fechaReserva::-webkit-calendar-picker-indicator {
-    opacity: 1;
-    cursor: pointer;
-    filter: invert(1);
-}
+    #fechaReserva::-webkit-date-and-time-value {
+        text-align: left;
+        color: white;
+    }
+
+    #fechaReserva::-webkit-calendar-picker-indicator {
+        opacity: 1;
+        cursor: pointer;
+        filter: invert(1);
+    }
+
 }

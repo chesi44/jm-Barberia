@@ -82,7 +82,7 @@ const pasoHorarios = document.getElementById("pasoHorarios");
 const horariosReserva = document.getElementById("horariosReserva");
 const pasoDatos = document.getElementById("pasoDatos");
 const nombreCliente = document.getElementById("nombreCliente");
-const emailCliente = document.getElementById("emailCliente");
+const telefonoCliente = document.getElementById("telefonoCliente");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const resumenTurno = document.getElementById("resumenTurno");
 const nombreAmigos = document.getElementById("nombresAmigos");
@@ -250,20 +250,24 @@ function generarHorariosReserva(duracion, ocupados){
 btnConfirmar.addEventListener("click", async () => {
 
     const nombre = nombreCliente.value;
-    const email = emailCliente.value;
+    const telefono = telefonoCliente.value;
     const fecha = fechaReserva.value;
 
-    if(nombre == "" || email == "" || horariosSeleccionado == ""){
+    if(nombre == "" || telefono == "" || horariosSeleccionado == ""){
 
         alert("Completá todos los datos del turno");
 
         return;
-    }
-    const {data , error} = await supabaseCliente.rpc(
+        }
+        if(!telefonoCliente.checkValidity()){
+            alert("Ingresá un telefono válido");
+            return;
+        }
+        const {data, error} = await supabaseCliente.rpc(
         "crear_turno",
         {
         p_nombre: nombre,
-        p_telefono: email,
+        p_telefono: telefono,
         p_servicio: servicioReserva,
         p_precio: precioReserva,
         p_fecha: fecha,
@@ -293,7 +297,7 @@ btnConfirmar.addEventListener("click", async () => {
     <p>Fecha: ${fecha}</p>
     <p>Horario: ${horariosSeleccionado}</p>
     <p>Nombre: ${nombre}</p>
-    <p>Email: ${email}</p>
+    <p>WhatsApp: ${telefono}</p>
     <strong>
     Total: $ ${precioReserva.toLocaleString("es-AR")}
     </strong>

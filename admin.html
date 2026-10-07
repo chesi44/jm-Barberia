@@ -67,17 +67,84 @@
             
             <div class="admin-encabezado">
 
-                <div>
-                    <p class="admin-subtitulo">JM BARBERÍA</p>
-                    <h1>Panel de administración</h1>
-                    <p>Resumen del negocio</p>
-                </div>
+    <div>
+        <p class="admin-subtitulo">JM BARBERÍA</p>
+        <h1>Panel de administración</h1>
+        <p>Resumen del negocio</p>
+    </div>
 
-                <button id="btnCerrarSesion" class="btn-cerrar-sesion">
-                    Cerrar sesión
-                </button>
-            </div>
+    <div class="admin-acciones">
 
+        <button id="btnEstadoAgenda" class="btn-agenda abierta">
+            🟢 Agenda abierta
+        </button>
+
+        <button id="btnCerrarSesion" class="btn-cerrar-sesion">
+            Cerrar sesión
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- PANEL PARA BLOQUEAR / CERRAR HORARIOS -->
+
+<div id="panelAgenda" class="panel-agenda">
+
+    <h3>Gestionar agenda</h3>
+
+    <div class="bloquear-horario">
+
+        <select id="horaInicioBloqueo">
+            <option value="">Desde</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+        </select>
+
+        <select id="horaFinBloqueo">
+            <option value="">Hasta</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+        </select>
+
+        <button id="btnBloquearHorario">
+            🔒 Bloquear
+        </button>
+
+    </div>
+
+    <button id="btnCerrarDia">
+        🔴 Cerrar resto del día
+    </button>
+    <div class="bloqueos-activos">
+    <h4>Bloqueos activos</h4>
+    <div id="listaBloqueos">
+        
+    </div>
+</div>
+</div>
+            
+        </div>
             <div class="admin-estadisticas">
 
                 <div class="admin-card">
@@ -92,7 +159,15 @@
                 </div>
 
             </div>
+            <h3>Seleccioná una fecha</h3>
+            <div class="navegacion-fecha">
+            
+    <button id="diaAnterior">←</button>
 
+    <input type="date" id="fechaAdmin">
+
+    <button id="diaSiguiente">→</button>
+</div>
             <div class="admin-contenido">
                 
                 <section class="admin-bloque">

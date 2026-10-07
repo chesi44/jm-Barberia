@@ -35,6 +35,50 @@ const cancelarPrecio = document.getElementById("cancelarPrecio");
 const cerrarModalPrecio = document.getElementById("cerrarModalPrecio");
 
 const notificacionAdmin = document.getElementById("notificacionAdmin");
+const fechaAdmin = document.getElementById("fechaAdmin");
+const diaAnterior = document.getElementById("diaAnterior");
+const diaSiguiente = document.getElementById("diaSiguiente");
+
+// Fecha inicial = hoy
+let fechaSeleccionada = new Date();
+
+function convertirFecha(fecha) {
+    const anio = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+    const dia = String(fecha.getDate()).padStart(2, "0");
+
+    return `${anio}-${mes}-${dia}`;
+}
+
+fechaAdmin.value = convertirFecha(fechaSeleccionada);
+
+
+// SIGUIENTE DÍA
+diaSiguiente.addEventListener("click", () => {
+    fechaSeleccionada.setDate(fechaSeleccionada.getDate() + 1);
+
+    fechaAdmin.value = convertirFecha(fechaSeleccionada);
+
+    cargarTurnosHoy();
+});
+
+
+// DÍA ANTERIOR
+diaAnterior.addEventListener("click", () => {
+    fechaSeleccionada.setDate(fechaSeleccionada.getDate() - 1);
+
+    fechaAdmin.value = convertirFecha(fechaSeleccionada);
+
+    cargarTurnosHoy();
+});
+
+
+// ELEGIR FECHA DESDE EL CALENDARIO
+fechaAdmin.addEventListener("change", () => {
+    fechaSeleccionada = new Date(fechaAdmin.value + "T00:00:00");
+
+    cargarTurnosHoy();
+});
 
 let turnoEditando = null;
 const listaTurnosCancelados =
@@ -77,7 +121,7 @@ btnLogin.addEventListener("click", async () => {
         const{ data, error } = await supabaseCliente
         .from ("turnos")
         .select("*")
-        .eq("fecha", fechaHoy)
+        .eq("fecha", fechaAdmin.value)
         .eq("estado", "cancelado")
         .order("horario",{ ascending: true });
         
@@ -157,7 +201,7 @@ async function cargarTurnosHoy(){
     const{ data, error } = await supabaseCliente
     .from("turnos")
     .select("*")
-    .eq("fecha", fechaHoy)
+    .eq("fecha", fechaAdmin.value)
     .eq("estado", "confirmado")
     .order("horario", { ascending: true });
 
@@ -623,3 +667,121 @@ const canalTurnos = supabaseCliente
     .subscribe((estado) => {
         console.log("Realtime:", estado);
     });
+    const btnEstadoAgenda = document.getElementById("btnEstadoAgenda");
+    const panelAgenda = document.getElementById("panelAgenda");
+    const listaBloqueos = document.getElementById("listaBloqueos");
+    async function cargarBloqueos() {
+
+    const fecha = fechaAdmin.value;
+
+    const { data, error } = await supabaseCliente
+        .from("horarios_bloqueados")
+        .select("*")
+        .eq("fecha", fecha)
+        .order("hora_inicio", { ascending: true });
+
+    if (error) {
+        console.error("Error al cargar bloqueos:", error);
+        return;
+    }
+
+    listaBloqueos.innerHTML = "";
+
+    if (data.length === 0) {
+        listaBloqueos.innerHTML = "<p>No hay horarios bloqueados.</p>";
+        return;
+    }
+
+    data.forEach((bloqueo) => {
+
+        const div = document.createElement("div");
+        div.classList.add("bloqueo-item");
+
+        div.innerHTML = `
+            <span>
+                🔒 ${bloqueo.hora_inicio.slice(0, 5)}
+                →
+                ${bloqueo.hora_fin.slice(0, 5)}
+            </span>
+
+            <button class="btn-abrir-bloqueo">
+                🔓 Abrir
+            </button>
+        `;
+
+        listaBloqueos.appendChild(div);
+        const btnAbrir = div.querySelector(".btn-abrir-bloqueo");
+
+btnAbrir.addEventListener("click", async () => {
+
+    const { error } = await supabaseCliente
+        .from("horarios_bloqueados")
+        .delete()
+        .eq("id", bloqueo.id);
+
+    if (error) {
+        console.error("Error al abrir horario:", error);
+        alert("No se pudo abrir el horario.");
+        return;
+    }
+
+    cargarBloqueos();
+
+    alert("Horario abierto nuevamente 🔓");
+});
+    });
+}
+    btnEstadoAgenda.addEventListener("click", () => {
+
+    if (panelAgenda.style.display === "block") {
+
+        panelAgenda.style.display = "none";
+
+    } else {
+
+        panelAgenda.style.display = "block";
+
+        cargarBloqueos();
+    }
+});
+
+    const horaInicioBloqueo = document.getElementById("horaInicioBloqueo");
+const horaFinBloqueo = document.getElementById("horaFinBloqueo");
+const btnBloquearHorario = document.getElementById("btnBloquearHorario");
+
+btnBloquearHorario.addEventListener("click", async () => {
+
+    const inicio = horaInicioBloqueo.value;
+    const fin = horaFinBloqueo.value;
+    const fecha = fechaAdmin.value;
+
+    if (!inicio || !fin) {
+        alert("Elegí desde qué hora hasta qué hora querés bloquear.");
+        return;
+    }
+
+    if (inicio >= fin) {
+        alert("La hora final tiene que ser posterior a la hora inicial.");
+        return;
+    }
+
+    const { error } = await supabaseCliente
+        .from("horarios_bloqueados")
+        .insert({
+            fecha: fecha,
+            hora_inicio: inicio,
+            hora_fin: fin,
+            motivo: "Bloqueado por administrador"
+        });
+
+    if (error) {
+        console.error("Error al bloquear horario:", error);
+        alert("No se pudo bloquear el horario.");
+        return;
+    }
+
+    alert(`Horario bloqueado de ${inicio} a ${fin} 🔒`);
+
+    horaInicioBloqueo.value = "";
+    horaFinBloqueo.value = "";
+});

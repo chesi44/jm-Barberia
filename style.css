@@ -695,6 +695,75 @@ footer{
     font-weight: bold;
     letter-spacing: 2px;
 }
+.admin-acciones {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-agenda {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-agenda.abierta {
+    background: #1d7041;
+    color: #fff;
+}
+
+.btn-agenda.cerrada {
+    background: #dc3545;
+    color: #fff;
+}
+.panel-agenda{
+    display: none;
+    background-color: #171717;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0 25px;
+    max-width: 550px;
+}
+.panel-agenda h3 {
+    margin: 0 0 15px;
+    color: white;
+    font-size: 18px;
+}
+.bloquear-horario{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.bloquear-horario select{
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 7px;
+    padding: 10px;
+    cursor: pointer;
+}
+#btnBloquearHorario{
+    background-color: #d4af37;
+    color: black;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+#btnCerrarDia{
+    background: transparent;
+    color: #ff5252;
+    border: 1px solid #ff5252;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
 .btn-cerrar-sesion{
     padding: 12px 20px;
     background: transparent;
@@ -1486,6 +1555,63 @@ footer{
 #fechaReserva.fecha-elegida {
     color: white;
 }
+
+.navegacion-fecha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+.navegacion-fecha button {
+    background: #d4af37;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#fechaAdmin {
+    background: #1d1d1d;
+    color: white;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.bloqueos-activos {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+.bloqueos-activos h4 {
+    margin-bottom: 12px;
+}
+
+.bloqueo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #222;
+    border-radius: 8px;
+
+    padding: 10px 12px;
+    margin-bottom: 8px;
+}
+
+.btn-abrir-bloqueo {
+    background: #19c463;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
 /* =========================
     RESPONSIVE CELULAR
 ========================= */
@@ -1557,7 +1683,13 @@ footer{
         color: #888;
         font-size: 14px;
     }
-
+    .flecha-placeholder{
+        left: 0;
+        right: 35px;
+        width: auto;
+        text-align: center;
+        transform: translateY(-50%);
+    }
     .flecha-carrusel {
         position: absolute;
         top: 50%;
@@ -1940,5 +2072,24 @@ footer{
     color: white;
     -webkit-text-fill-color: white;
 }
+.admin-acciones {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+    }
 
+    .btn-agenda {
+        flex: 1;
+        min-width: 0;
+        padding: 12px 10px;
+        white-space: nowrap;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .btn-cerrar-sesion {
+        flex: 1;
+        padding: 12px 10px;
+        white-space: nowrap;
+    }
 }

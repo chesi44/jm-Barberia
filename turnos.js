@@ -141,9 +141,12 @@ const duracionTotalReserva =
 
     const ocupados = await obtenerHorariosOcupados(fechaReserva.value);
 
-    console.log("Turnos ocupados recibidos:", ocupados);
+const bloqueados = await obtenerHorariosBloqueados(fechaReserva.value);
 
-    generarHorariosReserva(duracionReserva, ocupados);
+console.log("Turnos ocupados recibidos:", ocupados);
+console.log("Horarios bloqueados recibidos:", bloqueados);
+
+generarHorariosReserva(duracionReserva, ocupados, bloqueados);
 
 });
 function horaAMinutos(hora){
@@ -172,6 +175,7 @@ opcionesServicio.forEach((boton) => {
     });
 });
 async function obtenerHorariosOcupados(fecha){
+
     const {data, error} = await supabaseCliente.rpc(
         "obtener_horarios_ocupados",
         {
@@ -185,7 +189,21 @@ async function obtenerHorariosOcupados(fecha){
     console.log("Horarios ocupados:", data);
         return data;
 }
-function generarHorariosReserva(duracion, ocupados){
+async function obtenerHorariosBloqueados(fecha) {
+
+    const { data, error } = await supabaseCliente
+        .from("horarios_bloqueados")
+        .select("*")
+        .eq("fecha", fecha);
+
+    if (error) {
+        console.error("Error al obtener horarios bloqueados:", error);
+        return [];
+    }
+
+    return data;
+}
+function generarHorariosReserva(duracion, ocupados, bloqueados){
 
     horariosReserva.innerHTML = "";
     const duracionBloque =
@@ -224,7 +242,16 @@ function generarHorariosReserva(duracion, ocupados){
             return inicioNuevo < finOcupado && finNuevo > inicioOcupado;
 
         });
-        if (estaOcupado){
+        const estaBloqueado = bloqueados.some((bloqueo) => {
+    const inicioBloqueado = horaAMinutos(bloqueo.hora_inicio);
+    const finBloqueado = horaAMinutos(bloqueo.hora_fin);
+
+    const inicioNuevo = horaActual;
+    const finNuevo = horaActual + duracionBloque;
+
+    return inicioNuevo < finBloqueado && finNuevo > inicioBloqueado;
+});
+        if (estaOcupado || estaBloqueado){
             botonHora.disabled = true;
             botonHora.classList.add("horario-ocupado");
         }

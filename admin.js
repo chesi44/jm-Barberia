@@ -785,3 +785,57 @@ btnBloquearHorario.addEventListener("click", async () => {
     horaInicioBloqueo.value = "";
     horaFinBloqueo.value = "";
 });
+
+// ==========================
+// FORMULARIO DE TURNO MANUAL
+// ==========================
+
+const btnMostrarTurnoManual =
+    document.getElementById("btnMostrarTurnoManual");
+
+const panelTurnoManual =
+    document.getElementById("panelTurnoManual");
+
+const cancelarTurnoManual =
+    document.getElementById("cancelarTurnoManual");
+
+const formTurnoManual =
+    document.getElementById("formTurnoManual");
+
+const servicioManual =
+    document.getElementById("servicioManual");
+
+const precioManual =
+    document.getElementById("precioManual");
+
+const preciosServicios = {
+    "Corte de pelo": 14000,
+    "Corte + Barba": 16000,
+    "Color / Claritos": 50000
+};
+
+// ABRIR / CERRAR FORMULARIO
+
+btnMostrarTurnoManual.addEventListener("click", () => {
+    panelTurnoManual.classList.toggle("oculto");
+});
+
+cancelarTurnoManual.addEventListener("click", () => {
+    panelTurnoManual.classList.add("oculto");
+    formTurnoManual.reset();
+});
+
+// PRECIO AUTOMÁTICO
+
+servicioManual.addEventListener("change", () => {
+    precioManual.value = preciosServicios[servicioManual.value] ?? "";
+});
+
+// GUARDADO PENDIENTE DE SUPABASE
+
+formTurnoManual.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    document.getElementById("mensajeTurnoManual").textContent =
+        "Turno cargado exitosamente !";
+});

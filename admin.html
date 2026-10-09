@@ -89,7 +89,76 @@
 
 
 <!-- PANEL PARA BLOQUEAR / CERRAR HORARIOS -->
+</div>
 
+    <!-- AGREGAR TURNO MANUAL -->
+    <section class="turnos-manuales">
+
+        <button type="button" id="btnMostrarTurnoManual" class="btn-manual">
+            ➕ Agregar turno manual
+        </button>
+
+        <div id="panelTurnoManual" class="panel-turno-manual oculto">
+
+            <h2>Nuevo turno manual</h2>
+
+            <form id="formTurnoManual">
+
+                <label for="nombreManual">Nombre del cliente</label>
+                <input
+                    type="text"
+                    id="nombreManual"
+                    placeholder="Ej: Juan Pérez"
+                    required
+                >
+
+                <label for="servicioManual">Servicio</label>
+                <select id="servicioManual" required>
+                    <option value="">Seleccionar servicio</option>
+                    <option value="Corte de pelo">Corte de pelo</option>
+                    <option value="Corte + Barba">Corte + Barba</option>
+                    <option value="Color / Claritos">Color / Claritos</option>
+                </select>
+
+                <label for="precioManual">Precio cobrado ($)</label>
+                <input
+                    type="number"
+                    id="precioManual"
+                    min="0"
+                    step="1"
+                    placeholder="Ej: 14000"
+                    required
+                >
+
+                <label for="fechaManual">Fecha del turno</label>
+                <input type="date" id="fechaManual" required>
+
+                <label for="horaManual">Horario</label>
+                <input type="time" id="horaManual" required>
+
+                <label for="estadoPagoManual">Estado del pago</label>
+                <select id="estadoPagoManual">
+                    <option value="pagado">Pagado</option>
+                    <option value="pendiente">Pendiente</option>
+                </select>
+
+                <div class="acciones-manual">
+                    <button type="submit" id="guardarTurnoManual">
+                        Guardar turno
+                    </button>
+
+                    <button type="button" id="cancelarTurnoManual">
+                        Cancelar
+                    </button>
+                </div>
+
+                <p id="mensajeTurnoManual"></p>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- PANEL PARA BLOQUEAR / CERRAR HORARIOS -->
 <div id="panelAgenda" class="panel-agenda">
 
     <h3>Gestionar agenda</h3>

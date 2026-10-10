@@ -786,9 +786,11 @@ btnBloquearHorario.addEventListener("click", async () => {
     horaFinBloqueo.value = "";
 });
 
-// ==========================
+
 // FORMULARIO DE TURNO MANUAL
-// ==========================
+
+
+
 
 const btnMostrarTurnoManual =
     document.getElementById("btnMostrarTurnoManual");
@@ -833,9 +835,95 @@ servicioManual.addEventListener("change", () => {
 
 // GUARDADO PENDIENTE DE SUPABASE
 
-formTurnoManual.addEventListener("submit", (e) => {
+/* GUARDAR TURNO MANUAL EN SUPABASE */
+
+formTurnoManual.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    document.getElementById("mensajeTurnoManual").textContent =
-        "Turno cargado exitosamente !";
+    const nombre = document.getElementById("nombreManual").value.trim();
+    const servicio = document.getElementById("servicioManual").value;
+    const precio = Number(document.getElementById("precioManual").value);
+    const fecha = document.getElementById("fechaManual").value;
+    const horario = document.getElementById("horaManual").value;
+    const estadoPago = document.getElementById("estadoPagoManual").value;
+
+    const mensaje = document.getElementById("mensajeTurnoManual");
+    const btnGuardar = document.getElementById("guardarTurnoManual");
+
+    if (!nombre || !servicio || !fecha || !horario) {
+        mensaje.textContent = "Completá todos los campos.";
+        return;
+    }
+
+    if (!Number.isSafeInteger(precio) || precio < 0) {
+        mensaje.textContent = "Ingresá un precio válido.";
+        return;
+    }
+
+    btnGuardar.disabled = true;
+    mensaje.textContent = "Guardando turno...";
+
+    
+const { data: { user }, error: authError } =
+    await supabaseCliente.auth.getUser();
+
+console.log("Usuario administrador:", user?.id);
+console.log("Error de autenticación:", authError);
+
+    try {
+        const { data, error } = await supabaseCliente.rpc(
+            "crear_turno_manual",
+            {
+                p_nombre: nombre,
+                p_servicio: servicio,
+                p_precio: precio,
+                p_fecha: fecha,
+                p_horario: horario,
+                p_estado_pago: estadoPago
+            }
+        );
+
+        if (error) {
+            console.error("Error al guardar turno:", error);
+                    
+            console.log("MENSAJE:", error.message);
+            console.log("CODIGO:", error.code);
+            console.log("DETALLES:", error.details);
+            console.log("HINT:", error.hint);
+
+            mensaje.textContent = "Error: " + error.message;
+            return;
+        }
+
+        if (data !== true) {
+            mensaje.textContent = "No se pudo confirmar el guardado.";
+            return;
+        }
+
+        mensaje.textContent = "✅ Turno guardado correctamente";
+
+        formTurnoManual.reset();
+      // Actualizar agenda y resumen
+try {
+    if (typeof cargarTurnosHoy === "function") {
+        await cargarTurnosHoy();
+    }
+
+    if (typeof cargarResumenMes === "function") {
+        await cargarResumenMes();
+    }
+
+} catch (errorActualizacion) {
+    console.error(
+        "El turno se guardó, pero falló la actualización del panel:",
+        errorActualizacion
+    );
+}
+
+    } catch (error) {
+        console.error("Error inesperado:", error);
+        mensaje.textContent = "Ocurrió un error al guardar.";
+    } finally {
+        btnGuardar.disabled = false;
+    }
 });

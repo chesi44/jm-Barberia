@@ -2094,8 +2094,22 @@ footer{
         border-radius: 8px;
     }
 
-
-
+    .sancor{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .sancor img{
+        width: 250px;
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+    .cm{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
     .historial-resumen {
         grid-template-columns: repeat(2, 1fr);
     }

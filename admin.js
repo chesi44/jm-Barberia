@@ -3,11 +3,29 @@ let sonidoActivado = false;
 function activarSonidoAutomatico() {
     if (sonidoActivado) return;
 
-    sonidoActivado = true;
+    const audio = document.getElementById("sonidoTurno");
+    if (!audio) return;
 
-    console.log("🔔 Notificaciones sonoras habilitadas");
+    audio.muted = false;
+    audio.currentTime = 0;
+
+    const intento = audio.play();
+
+    if (intento) {
+        intento.then(() => {
+            audio.pause();
+            audio.currentTime = 0;
+
+            sonidoActivado = true;
+            console.log("🔔 Audio habilitado correctamente");
+        }).catch(error => {
+            console.log("Safari bloqueó el audio:", error);
+        });
+    }
 }
 
+document.addEventListener("click", activarSonidoAutomatico);
+document.addEventListener("touchend", activarSonidoAutomatico);
 // Activar cuando el administrador interactúe con la página
 document.addEventListener("click", activarSonidoAutomatico);
 document.addEventListener("keydown", activarSonidoAutomatico);

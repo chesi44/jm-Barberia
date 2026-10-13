@@ -1,3 +1,32 @@
+let sonidoActivado = false;
+
+function activarSonidoAutomatico() {
+    if (sonidoActivado) return;
+
+    sonidoActivado = true;
+
+    console.log("🔔 Notificaciones sonoras habilitadas");
+}
+
+// Activar cuando el administrador interactúe con la página
+document.addEventListener("click", activarSonidoAutomatico);
+document.addEventListener("keydown", activarSonidoAutomatico);
+
+function reproducirSonidoTurno() {
+    const audio = document.getElementById("sonidoTurno");
+
+    if (!audio) {
+        console.log("No se encontró el audio");
+        return;
+    }
+
+    audio.currentTime = 0;
+
+    audio.play().catch((error) => {
+        console.log("El navegador bloqueó el sonido:", error);
+    });
+}
+
 const SUPABASE_URL = "https://zccfkbfmwlmkukswwihv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_IzCUS3rfUgx3J2bIH2J4Eg_w7HuCLEC";
 
@@ -112,6 +141,8 @@ btnLogin.addEventListener("click", async () => {
     cargarResumenMes();
     cargarHistorial("hoy");
 });
+    
+
     async function cargarTurnosCancelados() {
         const hoy = new Date();
         const año = hoy.getFullYear();
@@ -442,7 +473,11 @@ async function cargarResumenMes(){
     
     const graficoServicios =
     document.getElementById("graficoServicios");
+    const graficoAnterior = Chart.getChart("graficoServicios");
 
+    if (graficoAnterior) {
+    graficoAnterior.destroy();
+    }
     new Chart(graficoServicios, {
         type: "doughnut",
 
@@ -658,7 +693,9 @@ const canalTurnos = supabaseCliente
         },
         (payload) => {
             console.log("Cambio en turnos:", payload);
-
+            if (payload.eventType === "INSERT" && sonidoActivado) {
+            reproducirSonidoTurno();
+        }
             cargarTurnosHoy();
             cargarResumenMes();
             cargarHistorial("hoy");

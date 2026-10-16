@@ -337,5 +337,12 @@ btnConfirmar.addEventListener("click", async () => {
     </strong>
     `;
     resumenTurno.classList.add("visible");
+    requestAnimationFrame(() => {
+        resumenTurno.scrollIntoView({
+            behavior:"smooth",
+            block: "start"
+        });
+    });
+    
     console.log("mostrando confirmacion")
 });

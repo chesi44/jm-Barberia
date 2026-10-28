@@ -235,6 +235,14 @@ function mostrarPromocion(turno) {
         return `${turno.servicio} · FUTSAL`;
     }
 
+    if (turno.promocion === "mensual") {
+        return `${turno.servicio} · 4 CORTES`;
+    }
+
+    if (turno.promocion === "mensual_corte") {
+        return `${turno.servicio} · MENSUALIDAD`;
+    }
+
     return turno.servicio;
 }
 async function cargarTurnosHoy(){
@@ -862,8 +870,65 @@ const formTurnoManual =
 const servicioManual =
     document.getElementById("servicioManual");
 
+const fechaManual = document.getElementById("fechaManual");
+const diaSemanaFechaManual = document.getElementById("diaSemanaFechaManual");
+
+function mostrarDiaSemanaFechaManual() {
+    if (!fechaManual.value) {
+        diaSemanaFechaManual.textContent = "";
+        return;
+    }
+
+    const [anio, mes, dia] = fechaManual.value.split("-").map(Number);
+    const fechaUTC = new Date(Date.UTC(anio, mes - 1, dia));
+    const diaSemana = new Intl.DateTimeFormat("es-AR", {
+        weekday: "long",
+        timeZone: "UTC"
+    }).format(fechaUTC);
+
+    diaSemanaFechaManual.textContent =
+        `${diaSemana.charAt(0).toUpperCase()}${diaSemana.slice(1)} ${dia} de ${new Intl.DateTimeFormat("es-AR", {
+            month: "long",
+            timeZone: "UTC"
+        }).format(fechaUTC)} de ${anio}`;
+}
+
+fechaManual.addEventListener("change", mostrarDiaSemanaFechaManual);
+
 const precioManual =
     document.getElementById("precioManual");
+
+const mensualidadManual = document.getElementById("mensualidadManual");
+const estadoMensualidadManual = document.getElementById("estadoMensualidadManual");
+let mensualidadesDisponibles = [];
+
+async function cargarMensualidadesDisponibles() {
+    const hoy = new Date();
+    const hoyISO = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}-${String(hoy.getDate()).padStart(2, "0")}`;
+    const { data, error } = await supabaseCliente
+        .from("mensualidades")
+        .select("id,nombre,telefono,vence_el,cortes_incluidos,cortes_usados")
+        .lt("cortes_usados", 4)
+        .gte("vence_el", hoyISO)
+        .order("vence_el", { ascending: true });
+
+    if (error) {
+        console.error("Error al cargar mensualidades:", error);
+        estadoMensualidadManual.textContent =
+            "No se pudieron cargar las mensualidades activas.";
+        return;
+    }
+
+    mensualidadesDisponibles = data ?? [];
+    mensualidadManual.innerHTML = '<option value="">Sin mensualidad</option>';
+
+    mensualidadesDisponibles.forEach((mensualidad) => {
+        const option = document.createElement("option");
+        option.value = mensualidad.id;
+        option.textContent = `${mensualidad.nombre} · ${mensualidad.cortes_incluidos - mensualidad.cortes_usados} cortes restantes`;
+        mensualidadManual.appendChild(option);
+    });
+}
 
 const preciosServicios = {
     "Corte de pelo": 14000,
@@ -875,17 +940,58 @@ const preciosServicios = {
 
 btnMostrarTurnoManual.addEventListener("click", () => {
     panelTurnoManual.classList.toggle("oculto");
+    if (!panelTurnoManual.classList.contains("oculto")) {
+        cargarMensualidadesDisponibles();
+    }
 });
 
 cancelarTurnoManual.addEventListener("click", () => {
     panelTurnoManual.classList.add("oculto");
     formTurnoManual.reset();
+    mostrarDiaSemanaFechaManual();
+    precioManual.readOnly = false;
+    estadoMensualidadManual.textContent = "";
 });
 
 // PRECIO AUTOMÁTICO
 
 servicioManual.addEventListener("change", () => {
+    mensualidadManual.value = "";
+    precioManual.readOnly = false;
+    estadoMensualidadManual.textContent = "";
     precioManual.value = preciosServicios[servicioManual.value] ?? "";
+});
+
+mensualidadManual.addEventListener("change", () => {
+    const mensualidad = mensualidadesDisponibles.find(
+        (item) => item.id === mensualidadManual.value
+    );
+
+    if (!mensualidad) {
+        precioManual.readOnly = false;
+        estadoMensualidadManual.textContent = "";
+        if (servicioManual.value) {
+            precioManual.value = preciosServicios[servicioManual.value] ?? "";
+        }
+        return;
+    }
+
+    document.getElementById("nombreManual").value = mensualidad.nombre;
+    servicioManual.value = "Corte de pelo";
+    precioManual.value = 0;
+    precioManual.readOnly = true;
+    estadoMensualidadManual.textContent =
+        `Se aplicará $0. Quedan ${mensualidad.cortes_incluidos - mensualidad.cortes_usados} cortes hasta ${mensualidad.vence_el}.`;
+});
+
+document.getElementById("nombreManual").addEventListener("input", () => {
+    if (mensualidadManual.value) {
+        mensualidadManual.value = "";
+        precioManual.readOnly = false;
+        precioManual.value = preciosServicios[servicioManual.value] ?? "";
+        estadoMensualidadManual.textContent =
+            "Elegí nuevamente la mensualidad para aplicar el corte incluido.";
+    }
 });
 
 // GUARDADO PENDIENTE DE SUPABASE
@@ -958,6 +1064,10 @@ console.log("Error de autenticación:", authError);
         mensaje.textContent = "✅ Turno guardado correctamente";
 
         formTurnoManual.reset();
+        mostrarDiaSemanaFechaManual();
+        precioManual.readOnly = false;
+        estadoMensualidadManual.textContent = "";
+        await cargarMensualidadesDisponibles();
       // Actualizar agenda y resumen
 try {
     if (typeof cargarTurnosHoy === "function") {

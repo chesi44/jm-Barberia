@@ -42,7 +42,14 @@ promocionesReservables.forEach((promo) => {
         } else if (tipoPromo === "futsal") {
 
             precioReserva = 13000;
+
+        } else if (tipoPromo === "mensual") {
+
+            precioReserva = 50000;
         }
+
+        // Mantenemos el servicio base para que coincida con el catálogo de turnos.
+        // El nombre de la promo se guarda aparte en p_promocion.
 
         document
             .querySelectorAll(".promo-reservable")
@@ -57,6 +64,9 @@ promocionesReservables.forEach((promo) => {
         document
             .getElementById("pasoFecha")
             .style.display = "block";
+
+        elegirServicio.style.display = "none";
+        document.querySelector(".promociones").style.display = "none";
 
 
         // Bajamos automáticamente hasta la fecha
@@ -85,7 +95,7 @@ const nombreCliente = document.getElementById("nombreCliente");
 const telefonoCliente = document.getElementById("telefonoCliente");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const resumenTurno = document.getElementById("resumenTurno");
-const nombreAmigos = document.getElementById("nombresAmigos");
+const nombreAmigos = document.getElementById("nombreAmigos");
 const duracionTotalReserva = 
     duracionReserva * cantidadTurnosReserva;
     fechaReserva.addEventListener("change", async () => {
@@ -327,7 +337,7 @@ btnConfirmar.addEventListener("click", async () => {
 
     resumenTurno.innerHTML = `
     <h2>✅ Turno confirmado</h2>
-    <p> ${servicioReserva}</p>
+    <p>${promocionReserva === "mensual" ? "Promo mensual · 4 cortes" : servicioReserva}</p>
     <p>Fecha: ${fecha}</p>
     <p>Horario: ${horariosSeleccionado}</p>
     <p>Nombre: ${nombre}</p>

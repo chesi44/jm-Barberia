@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -114,6 +114,12 @@
                     required
                 >
 
+                <label for="mensualidadManual">Cliente con mensualidad activa</label>
+                <select id="mensualidadManual">
+                    <option value="">Sin mensualidad</option>
+                </select>
+                <small id="estadoMensualidadManual"></small>
+
                 <label for="servicioManual">Servicio</label>
                 <select id="servicioManual" required>
                     <option value="">Seleccionar servicio</option>
@@ -134,6 +140,7 @@
 
                 <label for="fechaManual">Fecha del turno</label>
                 <input type="date" id="fechaManual" required>
+                <small id="diaSemanaFechaManual" aria-live="polite"></small>
 
                 <label for="horaManual">Horario</label>
                 <input type="time" id="horaManual" required>

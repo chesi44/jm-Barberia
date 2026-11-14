@@ -10,6 +10,7 @@ let servicioReserva = "";
 let precioReserva = 0;
 let promocionReserva = null;
 let cantidadTurnosReserva = 1;
+const DURACION_SERVICIO_MINUTOS = 30;
 
 const opcionesServicio = document.querySelectorAll(".opcion-servicio");
 const promocionesReservables =
@@ -25,7 +26,7 @@ promocionesReservables.forEach((promo) => {
 
         // Todas las promos son sobre corte de pelo
         servicioReserva = "Corte de pelo";
-        duracionReserva = 30;
+        duracionReserva = DURACION_SERVICIO_MINUTOS;
         cantidadTurnosReserva = 1;
 
         if (tipoPromo === "lunes") {
@@ -169,11 +170,10 @@ opcionesServicio.forEach((boton) => {
 
         const servicio = boton.dataset.servicio;
         const precio = boton.dataset.precio;
-        const duracion = boton.dataset.duracion;
 
         servicioReserva = servicio;
         precioReserva = Number(precio);
-        duracionReserva = Number(duracion);
+        duracionReserva = DURACION_SERVICIO_MINUTOS;
 
         elegirServicio.style.display = "none"
         document.querySelector(".promociones").style.display = "none";
@@ -181,7 +181,7 @@ opcionesServicio.forEach((boton) => {
 
         console.log(servicio);
         console.log(precio);
-        console.log(duracion);
+        console.log(duracionReserva);
     });
 });
 async function obtenerHorariosOcupados(fecha){
@@ -316,7 +316,7 @@ btnConfirmar.addEventListener("click", async () => {
         p_precio: precioReserva,
         p_fecha: fecha,
         p_horario: horariosSeleccionado,
-        p_duracion: duracionReserva,
+        p_duracion: DURACION_SERVICIO_MINUTOS,
         p_promocion: promocionReserva
         }
     );

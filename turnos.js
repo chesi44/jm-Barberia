@@ -25,7 +25,7 @@ promocionesReservables.forEach((promo) => {
 
         // Todas las promos son sobre corte de pelo
         servicioReserva = "Corte de pelo";
-        duracionReserva = 40;
+        duracionReserva = 30;
         cantidadTurnosReserva = 1;
 
         if (tipoPromo === "lunes") {
